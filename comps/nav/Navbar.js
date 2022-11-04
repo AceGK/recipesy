@@ -29,7 +29,7 @@ export default function Navbar() {
 
         {/* user is not signed in or has not created a username */}
         {!username && (
-          <Navitem href="/account">
+          <Navitem href="/login">
             <button>Login</button>
           </Navitem>
         )}
