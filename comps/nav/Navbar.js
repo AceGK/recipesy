@@ -23,8 +23,9 @@ export default function Navbar() {
             <Navitem href="/admin">
               <button>Add Recipe</button>
             </Navitem>
-            <Navitem href={`/${username}`}>
+            <Navitem href={`/user/${username}`}>
               <img src={user?.photoURL} />
+              <span>{username}</span>
             </Navitem>
           </>
         )}
