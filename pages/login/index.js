@@ -15,26 +15,28 @@ import styles from './login.module.scss'
 export default function LoginPage() {
 
   const [signup, setSignup] = useState(false);
+  const [resetPassword, setResetPassword] = useState(false);
 
   return (
     <div className={styles.login_container}>
-      {signup ?
-        <Signup /> :
-        <>
-        <Login setSignup={setSignup} />
-        <ForgotPassword />
-        </>
+
+      {
+      !signup ? 
+      !resetPassword ? <Login setSignup={setSignup} setResetPassword={setResetPassword} /> : <ForgotPassword /> 
+      : <Signup />
       }
+      
     </div>
   );
 }
 
-function Login({ setSignup }) {
+function Login({ setSignup, setResetPassword }) {
   return (
     <div className={styles.login}>
       <h1>Login</h1>
       <GoogleLogin />
       <EmailLogin />
+      <button onClick={() => setResetPassword(true)}>Forgot Password?</button>
       <span>Don't have an account?</span>
       <button onClick={() => setSignup(true)}>Signup</button>
     </div>
@@ -109,7 +111,7 @@ function Signup() {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log("logged in");
+        console.log("signed up");
         // Signed in 
         const user = userCredential.user;
         // ...
@@ -142,6 +144,7 @@ function Signup() {
     </div>
   );
 }
+
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -176,6 +179,7 @@ function ForgotPassword() {
           placeholder="email"
         />
         <button type="submit">Reset Password</button>
+        <button onClick={() => setResetPassword(false)}>Back to Login</button>
       </form>
     </>
   )
