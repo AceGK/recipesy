@@ -1,0 +1,18 @@
+.navbar {
+  background:grey;
+  ul {
+    list-style-type: none;
+    align-items: center;
+    display:flex;
+    gap:1em;
+    margin:0 auto;
+    padding:1em;
+  }
+  a {
+    text-decoration: none;
+  }
+  .logo {
+    margin-right:auto;
+    color:blue;
+  }
+}

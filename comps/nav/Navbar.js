@@ -8,8 +8,8 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <ul>
-        <Navitem href="/">
-          Logo
+        <Navitem href="/" class={styles.logo}>
+          Recipeasy
         </Navitem>
         <Navitem href="/category">
           Category
@@ -41,7 +41,7 @@ export default function Navbar() {
 
 function Navitem(props) {
   return (
-    <li>
+    <li className={props.class}>
       <Link href={props.href}>
         {props.children}
       </Link>

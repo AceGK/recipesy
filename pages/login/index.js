@@ -1,20 +1,44 @@
 import { useState } from 'react'
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from '../lib/firebase';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  sendPasswordResetEmail
+} from 'firebase/auth';
+import { auth } from '../../lib/firebase';
 import { useRouter } from 'next/router';
+
+import styles from './login.module.scss'
 
 export default function LoginPage() {
 
+  const [signup, setSignup] = useState(false);
+
   return (
-    <>
+    <div className={styles.login_container}>
+      {signup ?
+        <Signup /> :
+        <>
+        <Login setSignup={setSignup} />
+        <ForgotPassword />
+        </>
+      }
+    </div>
+  );
+}
+
+function Login({ setSignup }) {
+  return (
+    <div className={styles.login}>
       <h1>Login</h1>
       <GoogleLogin />
       <EmailLogin />
-
-      <h1>Signup</h1>
-      <Signup />
-    </>
-  );
+      <span>Don't have an account?</span>
+      <button onClick={() => setSignup(true)}>Signup</button>
+    </div>
+  )
 }
 
 
@@ -77,6 +101,7 @@ function EmailLogin() {
 
 
 function Signup() {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
 
@@ -95,7 +120,8 @@ function Signup() {
   }
 
   return (
-    <>
+    <div className={styles.signup}>
+      <h1>Signup</h1>
       <form onSubmit={handleSignup}>
         <input
           type='email'
@@ -113,6 +139,44 @@ function Signup() {
         />
         <button type='submit'>Signup</button>
       </form>
-    </>
+    </div>
   );
+}
+
+function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("")
+
+  function handleReset(e) {
+    e.preventDefault();
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log("password reset email sent");
+        setMessage("Check your email to reset password")
+      })
+      .catch((error) => {
+        console.log(error);
+        setError("Email not found");
+      })
+  }
+
+  return (
+    <>
+      <h1>Reset Password</h1>
+
+      {message && <p>{message}</p>}
+      {error && <p>{error}</p>}
+
+      <form onSubmit={handleReset}>
+        <input
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          type="email"
+          placeholder="email"
+        />
+        <button type="submit">Reset Password</button>
+      </form>
+    </>
+  )
 }
