@@ -13,7 +13,7 @@ import { useEffect, useContext, useState, useCallback } from 'react';
 import { UserContext } from '../../lib/context';
 import debounce from 'lodash.debounce';
 
-export default function Enter(props) {
+export default function Login(props) {
   const { user, username } = useContext(UserContext)
 
   // 1. user signed out, display login options
@@ -25,7 +25,7 @@ export default function Enter(props) {
         !username ? <UsernameForm /> : <SignOutButton />
         :
         <>
-        <Login />
+        <LoginOptions />
         <SignupForm />
         <ResetPassword />
         </>
@@ -35,7 +35,7 @@ export default function Enter(props) {
 }
 
 // Login options (sign in with google, sign in with email)
-function Login(){
+function LoginOptions(){
   return(
     <>
     <h1>Login</h1>
