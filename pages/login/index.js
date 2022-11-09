@@ -13,34 +13,39 @@ import { useEffect, useContext, useState, useCallback } from 'react';
 import { UserContext } from '../../lib/context';
 import debounce from 'lodash.debounce';
 
-export default function Login(props) {
-  const { user, username } = useContext(UserContext)
+import styles from './login.module.scss'
+import Logo from '../../public/recipeasy-logo';
+import Link from 'next/link';
 
-  // 1. user signed out, display login options
-  // 2. user signed in, but missing username, display <UsernameForm />
-  // 3. user signed in, has username, display <SignOutButton />
+export default function Login() {
+  const { user, username } = useContext(UserContext)
+  const [signUp, setSignUp] = useState(false);
+  const [resetPassword, setResetPassword] = useState(false);
+
   return (
-    <main>
-      {user ?
-        !username ? <UsernameForm /> : <SignOutButton />
-        :
-        <>
-        <LoginOptions />
-        <SignupForm />
-        <ResetPassword />
-        </>
-      }
+    <main className={styles.container}>
+      <Link href="/">
+        <Logo className="logo"/>
+      </Link>
+      <div className={styles.login}>
+        {user ?
+          !username ? <UsernameForm /> : <SignOutButton />
+          :
+          signUp ? <SignupForm setSignUp={setSignUp}/> : <LoginOptions setSignUp={setSignUp}/>
+        }
+      </div>
     </main>
   );
 }
 
 // Login options (sign in with google, sign in with email)
-function LoginOptions(){
+function LoginOptions({setSignUp}){
   return(
     <>
     <h1>Login</h1>
       <LoginWithGoogle />
       <LoginWithEmail />
+      <a onClick={() => setSignUp(true)}>No account? <span>SIGN UP</span></a>
     </>
   )
 
@@ -54,7 +59,9 @@ function LoginOptions(){
 
     return (
       <div>
-        <button onClick={signInWithGoogle}>Login with Google</button>
+        <button className={styles.googleButton} onClick={signInWithGoogle}>
+          <img src={'/google.svg'} width="20px" /> Login with Google
+        </button>
       </div>
     )
   }
@@ -100,7 +107,7 @@ function LoginOptions(){
 }
 
 // Sign up form 
-function SignupForm() {
+function SignupForm({setSignUp}) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
@@ -120,7 +127,7 @@ function SignupForm() {
   }
 
   return (
-    <div>
+    <>
       <h1>Signup</h1>
       <form onSubmit={handleSignup}>
         <input
@@ -137,9 +144,10 @@ function SignupForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type='submit'>Signup</button>
+        <button class={["button--dark"]} type='submit'>Signup</button>
       </form>
-    </div>
+      <a onClick={() => setSignUp(false)}>Already have an account? <span>LOGIN</span></a>
+    </>
   );
 }
 

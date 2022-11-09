@@ -1,6 +1,8 @@
 import styles from './navbar.module.scss'
 import Link from 'next/link'
 
+import Logo from '../../public/recipeasy-logo'
+
 import { useContext } from 'react';
 import { UserContext } from '../../lib/context';
 
@@ -11,7 +13,7 @@ export default function Navbar() {
     <nav className={styles.navbar}>
       <ul>
         <Navitem href="/" class={styles.logo}>
-          Recipeasy
+          <Logo className="logo"/>
         </Navitem>
         <Navitem href="/category">
           Category
@@ -24,7 +26,7 @@ export default function Navbar() {
               <button>Add Recipe</button>
             </Navitem>
             <Navitem href={`/user/${username}`}>
-              <img src={user?.photoURL} />
+              <img src={user?.photoURL || '/user-circle.svg'} referrerPolicy="no-referrer" />
               <span>{username}</span>
             </Navitem>
           </>
