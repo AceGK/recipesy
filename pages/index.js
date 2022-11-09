@@ -8,7 +8,9 @@ export default function Home() {
 
   return (
    <div>
+    <h1>Homepage</h1>
     <Loader show />
+    <button className="btn-gradient">hello</button>
    </div>
   )
 }

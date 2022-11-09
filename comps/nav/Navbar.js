@@ -25,9 +25,11 @@ export default function Navbar() {
             <Navitem href="/admin">
               <button>Add Recipe</button>
             </Navitem>
-            <Navitem href={`/user/${username}`}>
-              <img src={user?.photoURL || '/user-circle.svg'} referrerPolicy="no-referrer" />
-              <span>{username}</span>
+            <Navitem 
+              // href={`/user/${username}`}
+              href='/dashboard'
+            >
+              <img src={user?.photoURL || '/icons/user-circle.svg'} className={styles.userIcon} referrerPolicy="no-referrer" />
             </Navitem>
           </>
         )}

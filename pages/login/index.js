@@ -3,7 +3,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithPopup,
+  signInWithRedirect,
   sendPasswordResetEmail
 } from 'firebase/auth';
 import { auth } from '../../lib/firebase';
@@ -17,10 +17,18 @@ import styles from './login.module.scss'
 import Logo from '../../public/recipeasy-logo';
 import Link from 'next/link';
 
+import { useRouter } from "next/router";
+
 export default function Login() {
   const { user, username } = useContext(UserContext)
   const [signUp, setSignUp] = useState(false);
   const [resetPassword, setResetPassword] = useState(false);
+
+  const router = useRouter();
+
+    if (username) {
+      router.push('/dashboard');
+    }
 
   return (
     <main className={styles.container}>
@@ -53,14 +61,14 @@ function LoginOptions({setSignUp}){
   function LoginWithGoogle() {
 
     const signInWithGoogle = async () => {
-      const result = await signInWithPopup(getAuth(), new GoogleAuthProvider());
+      const result = await signInWithRedirect(getAuth(), new GoogleAuthProvider());
       console.log(result.user)
     }
 
     return (
       <div>
         <button className={styles.googleButton} onClick={signInWithGoogle}>
-          <img src={'/google.svg'} width="20px" /> Login with Google
+          <img src={'/icons/google.svg'} width="20px" /> Login with Google
         </button>
       </div>
     )
@@ -70,6 +78,8 @@ function LoginOptions({setSignUp}){
   function LoginWithEmail() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
+    const [message, setMessage] = useState("");
+    const [error, setError] = useState("")
 
     function handleLogin(e) {
       e.preventDefault();
@@ -81,7 +91,20 @@ function LoginOptions({setSignUp}){
         })
         .catch((error) => {
           console.log(error)
+          setError("Incorrect Password")
         });
+    }
+
+    function handleReset(e) {
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          console.log("password reset email sent");
+          setMessage("Check your email to reset password")
+        })
+        .catch((error) => {
+          console.log(error);
+          setMessage("Email not found");
+        })
     }
 
     return (
@@ -100,6 +123,9 @@ function LoginOptions({setSignUp}){
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {error && <p>{error}</p>}
+        {message && <p>{message}</p>}
+        {!message && <a onClick={()=>handleReset()}>Forgot password?</a>}
         <button type='submit'>Login</button>
       </form>
     )
@@ -257,42 +283,42 @@ function UsernameMessage({ username, isValid, loading }) {
   }
 }
 
-// Reset password form
-function ResetPassword() {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("")
+// Reset password form, deprecated as it's now apart of the email login form above
+// function ResetPassword() {
+//   const [email, setEmail] = useState("");
+//   const [message, setMessage] = useState("");
+//   const [error, setError] = useState("")
 
-  function handleReset(e) {
-    e.preventDefault();
-    sendPasswordResetEmail(auth, email)
-      .then(() => {
-        console.log("password reset email sent");
-        setMessage("Check your email to reset password")
-      })
-      .catch((error) => {
-        console.log(error);
-        setError("Email not found");
-      })
-  }
+//   function handleReset(e) {
+//     e.preventDefault();
+//     sendPasswordResetEmail(auth, email)
+//       .then(() => {
+//         console.log("password reset email sent");
+//         setMessage("Check your email to reset password")
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//         setError("Email not found");
+//       })
+//   }
 
-  return (
-    <>
-      <h1>Reset Password</h1>
+//   return (
+//     <>
+//       <h1>Reset Password</h1>
 
-      {message && <p>{message}</p>}
-      {error && <p>{error}</p>}
+//       {message && <p>{message}</p>}
+//       {error && <p>{error}</p>}
 
-      <form onSubmit={handleReset}>
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          type="email"
-          placeholder="email"
-        />
-        <button type="submit">Reset Password</button>
-        {/* <button onClick={() => setResetPassword(false)}>Back to Login</button> */}
-      </form>
-    </>
-  )
-}
+//       <form onSubmit={handleReset}>
+//         <input
+//           onChange={(e) => setEmail(e.target.value)}
+//           value={email}
+//           type="email"
+//           placeholder="email"
+//         />
+//         <button type="submit">Reset Password</button>
+//         {/* <button onClick={() => setResetPassword(false)}>Back to Login</button> */}
+//       </form>
+//     </>
+//   )
+// }

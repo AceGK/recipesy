@@ -83,7 +83,7 @@ select {
 //#region Globals
 
 body {
-  background: var(--clr-gray-400);
+  background: var(--clr-gray-500);
 }
 
 .logo {
@@ -94,20 +94,71 @@ body {
   }
 }
 
+// button {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   gap: 5px;
+//   padding: 8px 16px;
+//   border: none;
+//   background: var(--gradient-primary);
+//   background-size: 200% 200%;
+//   color: var(--clr-neutral-100);
+//   font-weight: bold;
+//   border-radius: var(--br-md);
+//   animation: gradient 10s ease infinite;
+//   border: 1px solid var(--clr-gray-400);
+//   &:hover {
+//     cursor: pointer;
+//     background: transparent;
+//     border-image: var(--gradient-primary);
+//     border-image-slice: 1;
+//     border-radius: var(--br-md);
+//   }
+// }
+// @keyframes gradient {
+//   0% {
+//     background-position: 0% 50%;
+//   }
+//   50% {
+//     background-position: 100% 50%;
+//   }
+//   100% {
+//     background-position: 0% 50%;
+//   }
+// }
+
 button {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
   padding: 8px 16px;
-  border: none;
-  background: var(--clr-primary-500);
+  background: var(--gradient-primary) border-box;
+  background-size: 200% 200%;
   color: var(--clr-neutral-100);
   font-weight: bold;
+  border: 1px solid transparent;
   border-radius: var(--br-md);
+  animation: gradient 10s ease infinite;
   &:hover {
-    cursor: pointer;
-    background: var(--clr-primary-500);
+    cursor:pointer;
+    background: 
+      linear-gradient(var(--clr-gray-400) 0 0) padding-box,
+      var(--gradient-primary) border-box;
+      background-size: 400% 400%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
@@ -121,7 +172,7 @@ form {
     border: 1px solid var(--clr-gray-100);
     border-radius: var(--br-md);
     padding: 0.25rem 0.5rem;
-    outline:none;
+    outline: none;
     &:focus {
       background-color: var(--clr-gray-400);
       outline: none;
@@ -134,8 +185,27 @@ form {
   input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px var(--clr-gray-500) inset !important;
     box-shadow: 0 0 0 30px var(--clr-gray-400) inset !important;
-    -webkit-text-fill-color:var(--clr-neutral-100)!important;
+    -webkit-text-fill-color: var(--clr-neutral-100) !important;
   }
+}
+
+a:hover {
+  cursor: pointer;
+  color: var(--clr-primary-500);
+}
+
+.gradient {
+  fill: url("#gradient-example");
+}
+
+.the-svg:hover .gradient ~ defs stop:first-child {
+  stop-color: hsl(37, 84%, 62%);
+}
+.the-svg:hover .gradient ~ defs stop:nth-child(2) {
+  stop-color: hsl(343, 74%, 57%);
+}
+.the-svg:hover .gradient ~ defs stop:last-child {
+  stop-color: hsl(252, 74%, 53%);
 }
 
 //#endregion

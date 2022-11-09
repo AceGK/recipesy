@@ -1,9 +1,22 @@
 import { auth } from '../lib/firebase';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/router';
+import { useContext, useEffect } from 'react';
+
+import { UserContext } from '../lib/context';
 
 export default function AccountPage() {
   const router = useRouter();
+  const { user, username } = useContext(UserContext);
+
+
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  }, [])
+
 
   function handleLogOut(e){
     e.preventDefault();
@@ -17,6 +30,7 @@ export default function AccountPage() {
       })
   }
 
+  if (user) {
   return ( 
     <>
       <h1>Account</h1>
@@ -25,5 +39,7 @@ export default function AccountPage() {
       </form>
     </>
    );
+  }
+  return null
 }
 

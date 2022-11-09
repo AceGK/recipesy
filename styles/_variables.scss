@@ -2,10 +2,18 @@
 
   // colors
 
-  // --clr-primary-100: hsl(240, 54%, 60%);
-  // --clr-primary-200: hsl(240, 38%, 52%);
+  --clr-primary-500:hsl(37, 84%, 62%);
 
-  --clr-primary-500:#14b8a6;
+  --clr-secondary-500:hsl(343, 74%, 57%);
+
+  --clr-tertiary-500:hsl(252, 74%, 53%);
+
+  --gradient-primary: linear-gradient(
+      142deg, 
+      var(--clr-primary-500) 0%, 
+      var(--clr-secondary-500) 50%, 
+      var(--clr-tertiary-500) 100%
+    );
 
   --clr-danger: hsl(0, 56%, 56%);
   --clr-warning: hsl(33, 88%, 65%);
@@ -28,9 +36,6 @@
   --clr-neutral-700: rgb(64 64 64);
   --clr-neutral-800: rgb(38 38 38);
   --clr-neutral-900: rgb(23 23 23);
-
-  // --clr-gradient-100: linear-gradient(180deg, var(--clr-secondary-200) 0%, var(--clr-secondary-200) 100%);
-  // --clr-gradient-200: linear-gradient(180deg, var(--clr-secondary-100) 0%, var(--clr-secondary-300) 100%);
 
   // font sizes
   --fs-100: 0.625rem;
