@@ -33,8 +33,10 @@ export default function AccountPage() {
   if (user) {
   return ( 
     <>
-      <h1>Account</h1>
+      <h1>Dashboard</h1>
       <form onSubmit={handleLogOut}>
+        {/* <p>name: {user}</p> */}
+        <p>display name:{username}</p>
         <button type='submit'>Logout</button>
       </form>
     </>
