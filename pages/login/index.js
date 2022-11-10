@@ -20,20 +20,26 @@ import debounce from 'lodash.debounce';
 import ErrorIcon from '../../public/icons/error.svg'
 
 export default function Login() {
-  const { user, username } = useContext(UserContext)
+  const { user, loading, username } = useContext(UserContext)
   const [signUp, setSignUp] = useState(false);
   const [resetPassword, setResetPassword] = useState(false);
 
   const router = useRouter();
 
-  if (username) {
-    router.push('/dashboard');
-  }
+  useEffect(() => {
+    auth.onAuthStateChanged(function(username) {
+      if (username){
+        router.push('/dashboard');
+      } else {
+        return
+      }
+    })
+  }, [])
 
   return (
     <main className={styles.container}>
-      <Link href="/">
-        <Logo className="logo" />
+      <Link href="/" className={styles.logo}>
+        <Logo />
       </Link>
       <div className={styles.login}>
 
@@ -49,6 +55,7 @@ export default function Login() {
               }
             </>
         }
+
       </div>
     </main>
   );
@@ -109,6 +116,7 @@ function LoginOptions({ setSignUp, setResetPassword }) {
           name='email'
           placeholder='Email'
           value={email}
+          autoComplete="username"
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
@@ -116,6 +124,7 @@ function LoginOptions({ setSignUp, setResetPassword }) {
           name='password'
           placeholder='Password'
           value={password}
+          autoComplete="current-password"
           onChange={(e) => setPassword(e.target.value)}
         />
         {error &&
@@ -208,7 +217,7 @@ function SignupForm({ setSignUp }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button class={["button--dark"]} type='submit'>Signup</button>
+        <button type='submit'>Signup</button>
         <a onClick={() => setSignUp(false)}>Already have an account? <span>LOGIN</span></a>
       </form>
     </>

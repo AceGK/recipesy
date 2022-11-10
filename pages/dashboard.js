@@ -10,19 +10,20 @@ export default function AccountPage() {
   const { user, username } = useContext(UserContext);
 
 
-
-  useEffect(() => {
-    if (!user) {
-      router.push("/login");
+  auth.onAuthStateChanged(function(user) {
+    if (!user){
+      router.push('/login');
+    } else {
+      return
     }
-  }, [])
+  })
 
 
   function handleLogOut(e){
     e.preventDefault();
     signOut(auth)
       .then(() => {
-        console.log("you are logged out");
+        // console.log("you are logged out");
         router.push("/");
       })
       .catch((error) => {

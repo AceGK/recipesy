@@ -6,9 +6,22 @@
   margin:auto;
   align-items: center;
   justify-content: center;
+  &:before {
+    content: "";
+    background-image: url('../../public/food-pattern.svg');
+    background-repeat: repeat;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.03;
+    filter:invert(1);
+  }
 }
 
 .login {
+  z-index: 1;
   background:var(--clr-gray-300);
   color:white;
   display:flex;
@@ -56,7 +69,8 @@
   gap:.5em;
   font-size:.8rem;
   &:hover {
-    background:var(--clr-gray-200);
+    // background:var(--clr-gray-200);
+    border:1px solid transparent;
   }
 }
 
@@ -75,4 +89,8 @@
 
 .resetPassword {
   align-self: flex-start;
+}
+
+.logo {
+  z-index: 2;
 }
