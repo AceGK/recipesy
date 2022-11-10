@@ -9,15 +9,19 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithRedirect,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { auth } from '../../lib/firebase';
 import { doc, writeBatch, getDoc, getFirestore } from 'firebase/firestore';
 import debounce from 'lodash.debounce';
 
 import ErrorIcon from '../../public/icons/error.svg'
+
+import { useGoogleLogin } from '../../hooks/useGoogleLogin';
+import { useLogin } from '../../hooks/useLogin';
+import { useLogout } from '../../hooks/useLogout';
+import { useResetPassword } from '../../hooks/useResetPassword'
+
 
 export default function Login() {
   const { user, loading, username } = useContext(UserContext)
@@ -26,9 +30,11 @@ export default function Login() {
 
   const router = useRouter();
 
+  // https://firebase.google.com/docs/auth/web/manage-users
+  // redirect if logged and have username
   useEffect(() => {
-    auth.onAuthStateChanged(function(username) {
-      if (username){
+    auth.onAuthStateChanged(function (username) {
+      if (username) {
         router.push('/dashboard');
       } else {
         return
@@ -36,150 +42,127 @@ export default function Login() {
     })
   }, [])
 
+
   return (
     <main className={styles.container}>
       <Link href="/" className={styles.logo}>
         <Logo />
       </Link>
       <div className={styles.login}>
-
         {user ?
-          !username ? <UsernameForm /> : <SignOutButton />
+          !username ? <UsernameForm /> : <LogoutButton />
           :
           signUp ? <SignupForm setSignUp={setSignUp} /> :
             <>
               {resetPassword ?
-                <ResetPassword setResetPassword={setResetPassword} />
+                <ResetPasswordForm setResetPassword={setResetPassword} />
                 :
                 <LoginOptions setSignUp={setSignUp} setResetPassword={setResetPassword} />
               }
             </>
         }
-
       </div>
     </main>
   );
 }
 
-// Login options (sign in with google, sign in with email)
 function LoginOptions({ setSignUp, setResetPassword }) {
+  const { googleLogin, errorMessageGoogle } = useGoogleLogin();
+  const { emailLogin, errorMessage } = useLogin();
+  const [inputValues, setInputValues] = useState({ email: '', password: '' });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInputValues({ ...inputValues, [name]: value });
+  };
+
+  function handleLogin(e) {
+    e.preventDefault();
+    emailLogin(inputValues.email, inputValues.password);
+  }
+
   return (
     <>
       <h1>Login</h1>
-      <LoginWithGoogle />
-      <LoginWithEmail />
-      <a onClick={() => setSignUp(true)}>No account? <span>SIGN UP</span></a>
-    </>
-  )
-
-  // Sign in with Google button
-  function LoginWithGoogle() {
-
-    const signInWithGoogle = async () => {
-      const result = await signInWithRedirect(getAuth(), new GoogleAuthProvider());
-      console.log(result.user)
-    }
-
-    return (
       <div>
-        <button className={styles.googleButton} onClick={signInWithGoogle}>
+        <button className={styles.googleButton} onClick={googleLogin}>
           <img src={'/icons/google.svg'} width="20px" /> Login with Google
         </button>
       </div>
-    )
-  }
-
-  // Sign in with Email form 
-  function LoginWithEmail() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("")
-    const [error, setError] = useState("")
-
-    function handleLogin(e) {
-      e.preventDefault();
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          console.log("logged in");
-          // Signed in 
-          const user = userCredential.user;
-        })
-        .catch((error) => {
-          console.log(error)
-          setError("Incorrect Password")
-        });
-    }
-
-    return (
       <form onSubmit={handleLogin}>
         <input
           type='email'
           name='email'
           placeholder='Email'
-          value={email}
+          value={inputValues.email}
           autoComplete="username"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleInputChange}
         />
         <input
           type='password'
           name='password'
           placeholder='Password'
-          value={password}
+          value={inputValues.password}
           autoComplete="current-password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handleInputChange}
         />
-        {error &&
+        {errorMessage &&
           <span className={styles.error}>
             <ErrorIcon />
-            {error}
+            {errorMessage}
+          </span>
+        }
+        {errorMessageGoogle &&
+          <span className={styles.error}>
+            <ErrorIcon />
+            {errorMessageGoogle}
           </span>
         }
         <a className={styles.resetPassword} onClick={() => setResetPassword(true)}>Forgot password?</a>
         <button type='submit'>Login</button>
       </form>
-    )
-  }
+      <a onClick={() => setSignUp(true)}>No account? <span>SIGN UP</span></a>
+    </>
+  )
 }
 
-function ResetPassword({ setResetPassword }) {
+function ResetPasswordForm({ setResetPassword }) {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("")
+  const { sendResetPassword, message, error } = useResetPassword();
 
   function handleReset(e) {
     e.preventDefault();
-    sendPasswordResetEmail(auth, email)
-      .then(() => {
-        console.log("password reset email sent");
-        setMessage("Check your email to reset password")
-      })
-      .catch((error) => {
-        console.log(error);
-        setError("Email not found");
-      })
+    sendResetPassword(email)
   }
 
   return (
     <>
       <h1>Reset Password</h1>
-
-      {message && <p>{message}</p>}
       {error && <p>{error}</p>}
-
-      <form onSubmit={handleReset}>
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          type="email"
-          placeholder="email"
-        />
-        <button type="submit">Reset Password</button>
-      </form>
-      <a onClick={() => setResetPassword(false)}>Already have an account? <span>LOGIN</span></a>
+      {message ? 
+        <>
+        <p>{message}</p> 
+        <button onClick={() => setResetPassword(false)}>Login</button>
+        </>
+        :
+        <>
+          <form onSubmit={handleReset}>
+            <input
+              type="email"
+              placeholder="email"
+              autoComplete="username"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button type="submit">Reset Password</button>
+          </form>
+          <a onClick={() => setResetPassword(false)}>Already have an account? <span>LOGIN</span></a>
+        </>
+      }
     </>
   )
 }
 
-// Sign up form 
 function SignupForm({ setSignUp }) {
 
   const [email, setEmail] = useState("");
@@ -224,7 +207,6 @@ function SignupForm({ setSignUp }) {
   );
 }
 
-// Username Form
 function UsernameForm() {
   const [formValue, setFormValue] = useState('');
   const [isValid, setIsValid] = useState(false);
@@ -310,27 +292,22 @@ function UsernameForm() {
       </section>
     )
   );
-}
 
-// Username availability message
-function UsernameMessage({ username, isValid, loading }) {
-  if (loading) {
-    return <p>Checking...</p>;
-  } else if (isValid) {
-    return <p className="text-success">{username} is available!</p>;
-  } else if (username && !isValid) {
-    return <p className="text-danger">That username is taken!</p>;
-  } else {
-    return <p></p>;
+  // Username availability message
+  function UsernameMessage({ username, isValid, loading }) {
+    if (loading) {
+      return <p>Checking...</p>;
+    } else if (isValid) {
+      return <p className="text-success">{username} is available!</p>;
+    } else if (username && !isValid) {
+      return <p className="text-danger">That username is taken!</p>;
+    } else {
+      return <p></p>;
+    }
   }
 }
 
-// Sign out button
-function SignOutButton() {
-  return (
-    <>
-      {/* <p>Hello, {username}</p> */}
-      <button onClick={() => auth.signOut()}>Sign Out</button>
-    </>
-  )
+function LogoutButton() {
+  const { logoutUser } = useLogout();
+  return <button onClick={logoutUser}>Logout</button>
 }
