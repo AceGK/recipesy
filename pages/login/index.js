@@ -5,28 +5,24 @@ import styles from './login.module.scss'
 import Logo from '../../public/recipeasy-logo';
 import Link from 'next/link';
 
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
-} from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../lib/firebase';
 import { doc, writeBatch, getDoc, getFirestore } from 'firebase/firestore';
 import debounce from 'lodash.debounce';
-
-import ErrorIcon from '../../public/icons/error.svg'
 
 import { useGoogleLogin } from '../../hooks/useGoogleLogin';
 import { useLogin } from '../../hooks/useLogin';
 import { useLogout } from '../../hooks/useLogout';
 import { useResetPassword } from '../../hooks/useResetPassword'
 
+import ErrorIcon from '../../public/icons/error.svg'
+
 
 export default function Login() {
-  const { user, loading, username } = useContext(UserContext)
+  const { user, username } = useContext(UserContext)
   const [signUp, setSignUp] = useState(false);
   const [resetPassword, setResetPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -36,33 +32,34 @@ export default function Login() {
     auth.onAuthStateChanged(function (username) {
       if (username) {
         router.push('/dashboard');
-      } else {
-        return
       }
     })
   }, [])
 
-
   return (
-    <main className={styles.container}>
-      <Link href="/" className={styles.logo}>
-        <Logo />
-      </Link>
-      <div className={styles.login}>
-        {user ?
-          !username ? <UsernameForm /> : <LogoutButton />
-          :
-          signUp ? <SignupForm setSignUp={setSignUp} /> :
-            <>
-              {resetPassword ?
-                <ResetPasswordForm setResetPassword={setResetPassword} />
-                :
-                <LoginOptions setSignUp={setSignUp} setResetPassword={setResetPassword} />
-              }
-            </>
-        }
-      </div>
-    </main>
+    <>
+      {loading ? <p>Loading...</p> :
+        <main className={styles.container}>
+          <Link href="/" className={styles.logo}>
+            <Logo />
+          </Link>
+          <div className={styles.login}>
+            {user ?
+              !username ? <UsernameForm /> : <LogoutButton />
+              :
+              signUp ? <SignupForm setSignUp={setSignUp} /> :
+                <>
+                  {resetPassword ?
+                    <ResetPasswordForm setResetPassword={setResetPassword} />
+                    :
+                    <LoginOptions setSignUp={setSignUp} setResetPassword={setResetPassword} />
+                  }
+                </>
+            }
+          </div>
+        </main>
+      }
+    </>
   );
 }
 
@@ -139,10 +136,10 @@ function ResetPasswordForm({ setResetPassword }) {
     <>
       <h1>Reset Password</h1>
       {error && <p>{error}</p>}
-      {message ? 
+      {message ?
         <>
-        <p>{message}</p> 
-        <button onClick={() => setResetPassword(false)}>Login</button>
+          <p>{message}</p>
+          <button onClick={() => setResetPassword(false)}>Login</button>
         </>
         :
         <>

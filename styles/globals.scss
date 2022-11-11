@@ -86,8 +86,14 @@ body {
   background: var(--clr-gray-500);
 }
 
-h1, h2, h3, h4, h5, h6, p {
-  color:white;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: white;
 }
 
 .logo {
@@ -112,11 +118,10 @@ button {
   border-radius: var(--br-md);
   animation: gradient 10s ease infinite;
   &:hover {
-    cursor:pointer;
-    background: 
-      linear-gradient(var(--clr-gray-400) 0 0) padding-box,
+    cursor: pointer;
+    background: linear-gradient(var(--clr-gray-400) 0 0) padding-box,
       var(--gradient-primary) border-box;
-      background-size: 400% 400%;
+    background-size: 400% 400%;
   }
 }
 
@@ -164,20 +169,24 @@ a:hover {
   color: var(--clr-primary-500);
 }
 
-
 // logo gradient
-.gradient {
-  fill: url("#gradient-example");
+.the-svg {
+  .gradient {
+    fill: white;
+  }
+  &:hover .gradient {
+    fill: url("#logo-gradient");
+  }
 }
 
-.the-svg:hover .gradient ~ defs stop:first-child {
-  stop-color: hsl(37, 84%, 62%);
-}
-.the-svg:hover .gradient ~ defs stop:nth-child(2) {
-  stop-color: hsl(343, 74%, 57%);
-}
-.the-svg:hover .gradient ~ defs stop:last-child {
-  stop-color: hsl(252, 74%, 53%);
-}
+// .the-svg:hover .gradient ~ defs stop:first-child {
+//   stop-color: hsl(37, 84%, 62%);
+// }
+// .the-svg:hover .gradient ~ defs stop:nth-child(2) {
+//   stop-color: hsl(343, 74%, 57%);
+// }
+// .the-svg:hover .gradient ~ defs stop:last-child {
+//   stop-color: hsl(252, 74%, 53%);
+// }
 
 //#endregion
