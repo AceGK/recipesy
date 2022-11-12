@@ -1,29 +1,30 @@
-import styles from './navbar.module.scss'
 import Link from 'next/link'
-
-import Logo from '../../comps/logo/Logo'
-
 import { useContext } from 'react';
 import { UserContext } from '../../lib/context';
+import { getCategories } from '../../lib/categories';
+
+import styles from './navbar.module.scss'
+import Logo from '../../comps/logo/Logo'
+
 
 export default function Navbar() {
   const { user, username } = useContext(UserContext)
-  
+
   return (
     <nav className={styles.navbar}>
       <ul>
         <Logo />
-        <Navitem href="/category">
-          Category
-        </Navitem>
+        <ul className={styles.primary}>
+          <Categories />
+        </ul>
 
         {/* user is signed in and has username */}
         {username && (
-          <ul className={styles.userMenu}>
+          <ul className={styles.secondary}>
             <Navitem href="/admin">
               <button>Add Recipe</button>
             </Navitem>
-            <Navitem 
+            <Navitem
               // href={`/user/${username}`}
               href='/dashboard'
             >
@@ -42,6 +43,23 @@ export default function Navbar() {
       </ul>
     </nav>
   );
+}
+
+function Categories(props) {
+  const { categories } = getCategories();
+  return (
+    <>
+      {categories.map((category) => (
+        <li key={category}>
+          <Link href={`/${category}`}>
+            {category}
+          </Link>
+          <div className='gradient-link' ></div>
+        </li>
+      ))
+      }
+    </>
+  )
 }
 
 function Navitem(props) {

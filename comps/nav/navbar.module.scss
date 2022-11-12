@@ -13,10 +13,14 @@
     text-decoration: none;
     color:white;
   }
-  .userMenu {
+  .primary, .secondary {
     margin:0px;
     justify-content: flex-end;
     padding:0em;
+    text-transform: capitalize;
+  }
+  .primary{
+    gap:1.4em;
   }
 }
 

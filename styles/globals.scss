@@ -171,13 +171,25 @@ a:hover {
 }
 
 // logo gradient (using svg animate)
-.the-svg {
-  .gradient {
-    fill: white;
-  }
-  &:hover .gradient {
-    fill: url("#logo-gradient");
-  }
+// .the-svg {
+//   .gradient {
+//     fill: white;
+//   }
+//   &:hover .gradient {
+//     fill: url("#logo-gradient");
+//   }
+// }
+
+.gradient-link {
+  background: transparent;
+  background-size:200% 2px;
+  padding-bottom:2px; //controls height
+  animation: gradient 10s ease infinite;
 }
+li:hover .gradient-link {
+  background: var(--gradient-primary) border-box;
+  background-size:200% 2px;
+}
+
 
 //#endregion
