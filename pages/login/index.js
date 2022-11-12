@@ -2,7 +2,7 @@ import { useEffect, useContext, useState, useCallback } from 'react';
 import { useRouter } from "next/router";
 import { UserContext } from '../../lib/context';
 import styles from './login.module.scss'
-import Logo from '../../public/recipeasy-logo';
+import Logo from '../../comps/logo/Logo';
 import Link from 'next/link';
 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -40,9 +40,7 @@ export default function Login() {
     <>
       {loading ? <p>Loading...</p> :
         <main className={styles.container}>
-          <Link href="/" className={styles.logo}>
-            <Logo />
-          </Link>
+          <Logo className={styles.logo} />
           <div className={styles.login}>
             {user ?
               !username ? <UsernameForm /> : <LogoutButton />

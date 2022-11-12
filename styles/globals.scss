@@ -169,7 +169,7 @@ a:hover {
   color: var(--clr-primary-500);
 }
 
-// logo gradient
+// logo gradient (using svg animate)
 .the-svg {
   .gradient {
     fill: white;
@@ -178,15 +178,5 @@ a:hover {
     fill: url("#logo-gradient");
   }
 }
-
-// .the-svg:hover .gradient ~ defs stop:first-child {
-//   stop-color: hsl(37, 84%, 62%);
-// }
-// .the-svg:hover .gradient ~ defs stop:nth-child(2) {
-//   stop-color: hsl(343, 74%, 57%);
-// }
-// .the-svg:hover .gradient ~ defs stop:last-child {
-//   stop-color: hsl(252, 74%, 53%);
-// }
 
 //#endregion

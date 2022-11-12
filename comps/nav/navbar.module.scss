@@ -1,9 +1,10 @@
 .navbar {
-  background:var(--clr-secondary-200);
+  background:transparent;
   ul {
     list-style-type: none;
     align-items: center;
     display:flex;
+    justify-content: space-between;
     gap:1em;
     margin:0 auto;
     padding:1em;
@@ -12,12 +13,12 @@
     text-decoration: none;
     color:white;
   }
-  .logo {
-    margin-right:auto;
-    width:180px;
+  .userMenu {
+    margin:0px;
+    justify-content: flex-end;
+    padding:0em;
   }
 }
-
 
 .userIcon {
   border-radius:100px;

@@ -1,7 +1,7 @@
 import styles from './navbar.module.scss'
 import Link from 'next/link'
 
-import Logo from '../../public/recipeasy-logo'
+import Logo from '../../comps/logo/Logo'
 
 import { useContext } from 'react';
 import { UserContext } from '../../lib/context';
@@ -12,16 +12,14 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <ul>
-        <Navitem href="/" class={styles.logo}>
-          <Logo className="logo"/>
-        </Navitem>
+        <Logo />
         <Navitem href="/category">
           Category
         </Navitem>
 
         {/* user is signed in and has username */}
         {username && (
-          <>
+          <ul className={styles.userMenu}>
             <Navitem href="/admin">
               <button>Add Recipe</button>
             </Navitem>
@@ -31,7 +29,7 @@ export default function Navbar() {
             >
               <img src={user?.photoURL || '/icons/user-circle.svg'} className={styles.userIcon} referrerPolicy="no-referrer" />
             </Navitem>
-          </>
+          </ul>
         )}
 
         {/* user is not signed in or has not created a username */}

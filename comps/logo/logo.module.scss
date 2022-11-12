@@ -1,0 +1,25 @@
+// svg mask
+.container {
+  width:200px;
+  height:60px;
+}
+
+.mask {
+  background: var(--clr-neutral-100) border-box;
+  background-size: 200% 200%;
+  animation: gradient 10s ease infinite;
+  display:block;
+  width:100%;
+  max-width: 200px;
+  height:100%;
+  max-height:60px;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;  
+  mask-image: url('/recipeasy-logo.svg');
+  mask-mode: alpha;
+  &:hover {
+    background:var(--gradient-primary) border-box;
+    background-size: 200% 200%;
+  }
+}

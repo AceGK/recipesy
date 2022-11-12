@@ -1,3 +1,5 @@
+// old version using svg animate (instead of mask)
+
 const Logo = () => {
   return (
     <svg className="the-svg" width="200px" viewBox="0 0 442.92 134.31" pointer-events="all">
