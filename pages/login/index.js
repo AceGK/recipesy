@@ -40,7 +40,7 @@ export default function Login() {
     <>
       {loading ? <p>Loading...</p> :
         <main className={styles.container}>
-          <Logo className={styles.logo} />
+          <Logo className={styles.logo} height="60px" width="200px"/>
           <div className={styles.login}>
             {user ?
               !username ? <UsernameForm /> : <LogoutButton />

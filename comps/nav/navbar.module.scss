@@ -1,30 +1,81 @@
+@import "styles/mixins";
+
 .navbar {
-  background:transparent;
+  background:var(--clr-gray-400);
+  display:flex;
+  justify-content: space-between;
+  padding:1em;
+  align-items: center;
+
   ul {
     list-style-type: none;
-    align-items: center;
-    display:flex;
-    justify-content: space-between;
-    gap:1em;
-    margin:0 auto;
-    padding:1em;
-  }
-  a {
-    text-decoration: none;
-    color:white;
-  }
-  .primary, .secondary {
     margin:0px;
-    justify-content: flex-end;
-    padding:0em;
+  }
+  
+  a { 
+    text-decoration: none;
+    color:var(--clr-neutral-100);
     text-transform: capitalize;
   }
-  .primary{
-    gap:1.4em;
+}
+
+.primaryMenu, .secondaryMenu {
+  display:flex;
+  gap:1em;
+  align-items: center;
+}
+
+.primaryMenu {
+  @include tablet() {
+    display:none;
   }
 }
 
 .userIcon {
   border-radius:100px;
   width:32px;
+  display:none;
+}
+
+.mobileButton {
+  display:none;
+  width:25px;
+  height:25px;
+  color:var(--clr-neutral-100);
+  &:hover {
+    color:var(--gradient-primary);
+    cursor:pointer;
+  }
+  @include tablet() {
+    display:block;
+  }
+}
+
+.searchButton {
+  display:block;
+  width:25px;
+  height:25px;
+  color:white;
+  &:hover {
+    color:var(--gradient-primary);
+    cursor:pointer;
+  }
+}
+
+.gradientLink {
+  background: transparent;
+  background-size:200% 2px;
+  padding-bottom:2px; //controls height
+  animation: gradient 10s ease infinite;
+}
+
+li:hover .gradientLink {
+  background: var(--gradient-primary) border-box;
+  background-size:200% 2px;
+}
+
+.userButton, .loginButton {
+  @include tablet(){
+    display:none;
+  }
 }

@@ -1,9 +1,9 @@
 import styles from './logo.module.scss'
 import Link from 'next/link'
 
-function Logo() {
+function Logo(props) {
   return (
-    <Link href="/" className={styles.container}>
+    <Link href="/" className={styles.container} style={{height:`${props.height}`, width:`${props.width}`}}>
       <div className={styles.mask}></div>
     </Link>
   );
