@@ -86,7 +86,7 @@ function SearchButton() {
   return( 
     <div 
       className={styles.searchButton}
-      onClick={() => console.log('mobile menu clicked')}
+      onClick={() => console.log('search button clicked')}
     >
       <SearchIcon />
     </div>
