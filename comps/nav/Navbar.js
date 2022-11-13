@@ -4,8 +4,8 @@ import { UserContext } from '../../lib/context';
 import { getCategories } from '../../lib/categories';
 
 import styles from './navbar.module.scss'
-import Logo from '../../comps/logo/Logo'
 
+import Logo from '../../comps/logo/Logo'
 import MenuIcon from '../../public/icons/mobile-menu.svg'
 import SearchIcon from '../../public/icons/search.svg'
 
