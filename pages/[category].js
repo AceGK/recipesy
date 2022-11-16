@@ -38,14 +38,25 @@ export async function getServerSideProps(context) {
   const categorySlug = context.params.category;
   let recipes = [];
 
-  const q = query(
-    collection(firestore, 'recipes'),
-    where('category', 'array-contains', categorySlug)
-  )
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach((doc) => {
-    recipes.push({ id: doc.id, ...doc.data() });
-  });
+  if (categorySlug == 'all') {
+    const q = query(
+      collection(firestore, 'recipes'),
+    )
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      recipes.push({ id: doc.id, ...doc.data() });
+    });
+  } else {
+    const q = query(
+      collection(firestore, 'recipes'),
+      where('category', 'array-contains', categorySlug)
+    )
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      recipes.push({ id: doc.id, ...doc.data() });
+    });
+  }
+
 
   return {
     props: {
