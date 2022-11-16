@@ -1,3 +1,4 @@
+import UserProfile from '../../comps/user/Profile';
 import { getUserWithUsername } from '../../lib/firebase';
 
 
@@ -29,11 +30,7 @@ export default function UserProfilePage({ user }) {
   return (
     <main>
       {/* <Metatags title={user.username} description={`${user.username}'s public profile`} /> */}
-      <img src={user?.photoURL || '/icons/user-circle.svg'} referrerPolicy="no-referrer" />
-      <p>
-        <i>@{user.username}</i>
-      </p>
-      <h1>{user.displayName || 'Anonymous User'}</h1>
+      <UserProfile user={user} />
     </main>
   );
 }
