@@ -38,6 +38,7 @@ export async function getServerSideProps(context) {
   const categorySlug = context.params.category;
   let recipes = [];
 
+  // query all recipes
   if (categorySlug == 'all') {
     const q = query(
       collectionGroup(firestore, 'recipes'),
@@ -46,7 +47,9 @@ export async function getServerSideProps(context) {
     querySnapshot.forEach((doc) => {
       recipes.push({ id: doc.id, ...doc.data() });
     });
-  } else {
+  } 
+  // else query the category URL slug
+  else {
     const q = query(
       collectionGroup(firestore, 'recipes'),
       where('category', 'array-contains', categorySlug)
