@@ -1,16 +1,33 @@
 
 import { firestore } from '../../lib/firebase';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, collectionGroup, getDocs, query, where } from 'firebase/firestore';
 import Link from 'next/link';
 
 export default function Recipe({recipe}) {
+
   return ( 
     <>
-    <p>{recipe.title}</p>
-    <Link href={`/user/${recipe.author}`}>
-      <p>{recipe.author}</p>
-    </Link>
-    <p>{recipe.content}</p>
+      <p>title: {recipe.title}</p>
+
+      <Link href={`/user/${recipe.author}`}>
+        <p>author: {recipe.author}</p>
+      </Link>
+
+      <p>description: {recipe.description}</p>
+
+      <p>Ingredients:</p>
+        <ul>
+          {recipe.ingredients.map((i) => (
+              <li key={i}>{i}</li>
+            ))}
+        </ul>
+
+      <p>Instructions:</p>
+        <ul>
+          {recipe.instructions.map((i) => (
+              <li key={i}>{i}</li>
+            ))}
+        </ul>
     </>
    );
 }
@@ -18,7 +35,7 @@ export default function Recipe({recipe}) {
 export async function getStaticPaths() {
   let paths = [];
 
-  const querySnapshot = await getDocs(collection(firestore, 'recipes'));
+  const querySnapshot = await getDocs(collectionGroup(firestore, 'recipes'));
   querySnapshot.forEach((doc) => {
     paths.push(doc.data().slug);
   });
@@ -33,7 +50,7 @@ export async function getStaticProps(context) {
   const recipeSlug = context.params.slug;
   let recipe = {};
 
-  const recipesRef = collection(firestore, 'recipes');
+  const recipesRef = collectionGroup(firestore, 'recipes');
   const q = query(recipesRef, where('slug', '==', recipeSlug));
 
   const querySnapshot = await getDocs(q);

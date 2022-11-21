@@ -3,7 +3,7 @@ import styles from '../styles/Categories.module.scss'
 import { getCategories } from '../lib/categories';
 
 import { firestore } from '../lib/firebase';
-import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
+import { collection, collectionGroup, getDocs, orderBy, query, where } from 'firebase/firestore';
 import RecipeCard from '../comps/recipe/Card';
 
 export default function CategoryPages({ recipes }) {
@@ -19,7 +19,7 @@ export default function CategoryPages({ recipes }) {
       </div>
       <div className={styles.recipes}>
         {recipes.map((recipe) => (
-          <RecipeCard id={recipe.id} recipe={recipe} />
+          <RecipeCard id={recipe} recipe={recipe} />
         ))}
       </div>
     </>
@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
 
   if (categorySlug == 'all') {
     const q = query(
-      collection(firestore, 'recipes'),
+      collectionGroup(firestore, 'recipes'),
     )
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
@@ -48,7 +48,7 @@ export async function getServerSideProps(context) {
     });
   } else {
     const q = query(
-      collection(firestore, 'recipes'),
+      collectionGroup(firestore, 'recipes'),
       where('category', 'array-contains', categorySlug)
     )
     const querySnapshot = await getDocs(q);
