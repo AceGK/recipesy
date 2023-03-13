@@ -84,6 +84,14 @@ select {
 
 body {
   background: var(--clr-gray-600);
+  background-image: linear-gradient(to bottom right, #232832, #0d0c13);
+}
+
+.container {
+  width: calc(100% - 2.5rem);
+  max-width: 1400px;
+  margin: auto;
+  // border:1px dotted red;
 }
 
 h1,
@@ -106,7 +114,8 @@ a {
   }
 }
 
-button {
+button,
+.btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,11 +128,37 @@ button {
   border: 1px solid transparent;
   border-radius: var(--br-md);
   animation: gradient 10s ease infinite;
+  text-decoration: none;
+  text-transform: capitalize;
   &:hover {
     cursor: pointer;
     background: linear-gradient(var(--clr-gray-400) 0 0) padding-box,
       var(--gradient-primary) border-box;
     background-size: 400% 400%;
+  }
+}
+
+.btn-dark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,.03);
+  background-size: 200% 200%;
+  color: var(--clr-neutral-200);
+  font-weight: bold;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--br-md);
+  animation: gradient 10s ease infinite;
+  text-decoration: none;
+  text-transform: capitalize;
+  &:hover {
+    cursor: pointer;
+    background: linear-gradient(var(--clr-gray-400) 0 0) padding-box,
+      var(--gradient-primary) border-box;
+    background-size: 400% 400%;
+    color: var(--clr-neutral-200);
   }
 }
 
@@ -184,14 +219,13 @@ a:hover {
 
 .gradient-link {
   background: transparent;
-  background-size:200% 2px;
-  padding-bottom:2px; //controls height
+  background-size: 200% 2px;
+  padding-bottom: 2px; //controls height
   animation: gradient 10s ease infinite;
 }
 li:hover .gradient-link {
   background: var(--gradient-primary) border-box;
-  background-size:200% 2px;
+  background-size: 200% 2px;
 }
-
 
 //#endregion

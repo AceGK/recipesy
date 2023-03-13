@@ -12,6 +12,7 @@ import SearchIcon from '../../public/icons/search.svg'
 export default function Navbar() {
 
   return (
+    <div className='container'>
     <nav className={styles.navbar}>
       <div className={styles.logo}>
         <Logo height="50px" width="150px"/>
@@ -19,6 +20,7 @@ export default function Navbar() {
       <PrimaryMenu />
       <SecondaryMenu />
     </nav>
+    </div>
   );
 }
 
@@ -31,21 +33,41 @@ function Navitem(props) {
 }
 
 function PrimaryMenu() {
-  const { categories } = getCategories();
   return (
     <ul className={styles.primaryMenu}>
-      {categories.map((category) => (
-        <li key={category}>
-          <Link href={`/${category}`}>
-            {category}
-          </Link>
-          <div className={styles.gradientLink} ></div>
-        </li>
-      ))
-      }
+      <li>
+        <Link href="/recipes">recipes</Link>
+        <div className={styles.gradientLink} />
+      </li>
+      <li>
+        <Link href="/recipes/categories">categories</Link>
+        <div className={styles.gradientLink} />
+      </li>
+      <li>
+        <Link href="/guides">tips & guides</Link>
+        <div className={styles.gradientLink} />
+      </li>
     </ul>
   )
 }
+
+// category menu items 
+// function PrimaryMenu() {
+//   const { categories } = getCategories();
+//   return (
+//     <ul className={styles.primaryMenu}>
+//       {categories.map((category) => (
+//         <li key={category}>
+//           <Link href={`/${category}`}>
+//             {category}
+//           </Link>
+//           <div className={styles.gradientLink} ></div>
+//         </li>
+//       ))
+//       }
+//     </ul>
+//   )
+// }
 
 function SecondaryMenu() {
   const { user, username } = useContext(UserContext)
@@ -55,7 +77,7 @@ function SecondaryMenu() {
       {username && (
         <Navitem href='/dashboard' className={styles.userButton}>
           <img
-            className={styles.userIcon}
+            className={styles.avatar}
             src={user?.photoURL || '/icons/user-circle.svg'}
             referrerPolicy="no-referrer" />
         </Navitem>

@@ -8,7 +8,6 @@ import { query as fireQuery } from 'firebase/firestore';
 
 export async function getServerSideProps({ query }) {
   const { username } = query;
-  let recipes = [];
 
   const userDoc = await getUserWithUsername(username);
 
@@ -21,8 +20,8 @@ export async function getServerSideProps({ query }) {
 
   // JSON serializable data
   let user = null;
-  // let recipes = null;
-
+  let recipes = [];
+  
   if (userDoc) {
     user = userDoc.data();
     const recipesQuery = fireQuery(
