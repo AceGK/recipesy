@@ -88,11 +88,11 @@ function MobileButton() {
 
 function SearchButton() {
   return( 
-    <div 
+    <li 
       className={styles.searchButton}
       onClick={() => console.log('search button clicked')}
     >
       <SearchIcon />
-    </div>
+    </li>
   )
 }

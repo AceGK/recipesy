@@ -106,8 +106,12 @@ a {
   color: var(--clr-neutral-100);
   text-decoration: none;
   &:hover {
-    cursor:pointer;
+    cursor:default;
   }
+}
+
+a:hover {
+  cursor: pointer;
 }
 
 .logo {
@@ -148,11 +152,11 @@ button,
   justify-content: center;
   gap: 5px;
   padding: 8px 16px;
-  background: rgba(255,255,255,.03);
+  background: rgba(255, 255, 255, 0.03);
   background-size: 200% 200%;
   color: var(--clr-neutral-200);
   font-weight: bold;
-  border: 1px solid rgba(255,255,255,.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--br-md);
   animation: gradient 10s ease infinite;
   text-decoration: none;
@@ -166,7 +170,7 @@ button,
   }
 }
 
-// duplicate in logo.module.scss, nav.module.scss
+// duplicate in logo.module.scss, nav.module.scss, card.module.scss
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
