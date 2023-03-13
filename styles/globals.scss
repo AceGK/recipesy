@@ -104,6 +104,10 @@ p,
 li,
 a {
   color: var(--clr-neutral-100);
+  text-decoration: none;
+  &:hover {
+    cursor:pointer;
+  }
 }
 
 .logo {
@@ -200,11 +204,6 @@ form {
     box-shadow: 0 0 0 30px var(--clr-gray-400) inset !important;
     -webkit-text-fill-color: var(--clr-neutral-100) !important;
   }
-}
-
-a:hover {
-  cursor: pointer;
-  color: var(--clr-primary-500);
 }
 
 // logo gradient (using svg animate)

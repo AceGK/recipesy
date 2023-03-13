@@ -51,24 +51,6 @@ function PrimaryMenu() {
   )
 }
 
-// category menu items 
-// function PrimaryMenu() {
-//   const { categories } = getCategories();
-//   return (
-//     <ul className={styles.primaryMenu}>
-//       {categories.map((category) => (
-//         <li key={category}>
-//           <Link href={`/${category}`}>
-//             {category}
-//           </Link>
-//           <div className={styles.gradientLink} ></div>
-//         </li>
-//       ))
-//       }
-//     </ul>
-//   )
-// }
-
 function SecondaryMenu() {
   const { user, username } = useContext(UserContext)
   return (

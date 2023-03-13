@@ -1,14 +1,17 @@
 import styles from './card.module.scss'
 import Link from 'next/link';
 
-function RecipeCard({recipe}) {
-  return ( 
-    <Link href={`/recipes/${recipe.slug}`}>
-      <div className={styles.card}>
-        <span>{recipe.title}</span>
+export default function RecipeCard({ recipe }) {
+  console.log(recipe)
+  return (
+    <Link className={styles.card} href={`/recipes/${recipe.slug}`}>
+      <span className={styles.title}>{recipe.title}</span>
+      <span className={styles.description}>{recipe.description}</span>
+      <div className={styles.tags}>
+      {recipe.category.map((category) => (
+        <span>{category}</span>
+      ))}
       </div>
     </Link>
-   );
+  );
 }
-
-export default RecipeCard;
