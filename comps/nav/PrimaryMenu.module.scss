@@ -1,0 +1,37 @@
+@import "styles/mixins";
+
+.primaryMenu {
+  flex: 1;
+  display:flex;
+  gap:1em;
+  align-items: center;
+  @include tablet() {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+  }
+}
+
+.gradientLink {
+  background: transparent;
+  background-size:200% 2px;
+  padding-bottom:2px; //controls height
+  animation: gradient 10s ease infinite;
+}
+
+li:hover .gradientLink {
+  background: var(--gradient-primary) border-box;
+  background-size:200% 2px;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

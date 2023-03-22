@@ -3,13 +3,17 @@ import { useContext } from 'react';
 import { UserContext } from '../../lib/context';
 import { getCategories } from '../../lib/categories';
 
-import styles from './navbar.module.scss'
+import styles from './Nav.module.scss'
 
-import Logo from '../../comps/logo/Logo'
-import MenuIcon from '../../public/icons/mobile-menu.svg'
+import Logo from '../logo/Logo'
 import SearchIcon from '../../public/icons/search.svg'
+import PrimaryMenu from './PrimaryMenu'
+import MobileMenu from './MobileMenu'
+import useMediaQuery from '../../hooks/useMediaQuery';
+
 
 export default function Navbar() {
+  const isBreakpoint = useMediaQuery(850);
 
   return (
     <div className='container'>
@@ -17,7 +21,7 @@ export default function Navbar() {
       <div className={styles.logo}>
         <Logo height="50px" width="150px"/>
       </div>
-      <PrimaryMenu />
+      {!isBreakpoint && <PrimaryMenu />}
       <SecondaryMenu />
     </nav>
     </div>
@@ -29,25 +33,6 @@ function Navitem(props) {
     <Link href={props.href} className={props.className}>
       {props.children}
     </Link>
-  )
-}
-
-function PrimaryMenu() {
-  return (
-    <ul className={styles.primaryMenu}>
-      <li>
-        <Link href="/recipes">recipes</Link>
-        <div className={styles.gradientLink} />
-      </li>
-      <li>
-        <Link href="/recipes/categories">categories</Link>
-        <div className={styles.gradientLink} />
-      </li>
-      <li>
-        <Link href="/guides">tips & guides</Link>
-        <div className={styles.gradientLink} />
-      </li>
-    </ul>
   )
 }
 
@@ -70,19 +55,8 @@ function SecondaryMenu() {
           <button>Login</button>
         </Navitem>
       )}
-      <MobileButton />
+      <MobileMenu />
     </ul>
-  )
-}
-
-function MobileButton() {
-  return( 
-    <div 
-      className={styles.mobileButton}
-      onClick={() => console.log('mobile menu clicked')}
-    >
-      <MenuIcon />
-    </div>
   )
 }
 

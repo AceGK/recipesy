@@ -1,5 +1,5 @@
 import '../styles/globals.scss'
-import Navbar from '../comps/nav/Navbar'
+import Nav from '../comps/nav/Nav'
 import { Inter } from '@next/font/google'
 
 import { UserContext } from '../lib/context';
@@ -19,7 +19,7 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <UserContext.Provider value={userData}>
       <main className={customFont.className}>
-        {showHeader && <Navbar />}
+        {showHeader && <Nav />}
         <Component {...pageProps} />
       </main>
     </UserContext.Provider>

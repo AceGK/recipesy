@@ -1,0 +1,47 @@
+@import "styles/mixins";
+
+.hamburger {
+  display:none;
+  width:25px;
+  height:25px;
+  color:var(--clr-neutral-100);
+  &:hover {
+    // color:var(--gradient-primary);
+    cursor:pointer;
+  }
+  @include tablet() {
+    display:block;
+  }
+}
+
+.menu {
+  visibility: hidden;
+  background:var(--gradient-secondary);
+  padding:2em;
+  position:absolute;
+  --navHeight:82px;
+  top:var(--navHeight);
+  left:0;
+  width:200px;
+  height:calc(100vh - var(--navHeight));
+  overflow:hidden;
+  z-index: 1;
+
+  &__active {
+    visibility: visible;
+  }
+
+}
+
+.backdrop {
+  position:absolute;
+  --navHeight:82px;
+  top:var(--navHeight);
+  left:0;
+  width:200px;
+  height:calc(100vh - var(--navHeight));
+  left:0;
+  width:100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 0;
+}

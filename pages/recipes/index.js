@@ -3,20 +3,18 @@ import { firestore } from '../../lib/firebase';
 import { collection, collectionGroup, getDocs, orderBy, query, where } from 'firebase/firestore';
 import RecipeCard from '../../comps/recipe/Card';
 import CategoryList from '../../comps/categoryList'
+import Header from '../../comps/categoryHeader';
 
 export default function Categories({ recipes }) {
 
   return (
     <div className="container">
-      <div className={styles.header}>
-        <h1>
-          All Recipes
-        </h1>
+      <Header /> 
       <CategoryList />
-      </div>
+    
       <div className={styles.recipes}>
         {recipes.map((recipe) => (
-          <RecipeCard id={recipe} recipe={recipe} />
+          <RecipeCard recipe={recipe} key={recipe.id} />
         ))}
       </div>
     </div>

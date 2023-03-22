@@ -3,9 +3,7 @@
   // colors
 
   --clr-primary-500:hsl(37, 84%, 62%);
-
   --clr-secondary-500:hsl(343, 74%, 57%);
-
   --clr-tertiary-500:hsl(252, 74%, 53%);
 
   --gradient-primary: linear-gradient(
@@ -14,6 +12,9 @@
       var(--clr-secondary-500) 50%, 
       var(--clr-tertiary-500) 100%
     );
+
+  --gradient-secondary: linear-gradient(to bottom right,#191c23,#232832);
+
 
   --clr-danger: hsl(0, 56%, 56%);
   --clr-warning: hsl(33, 88%, 65%);

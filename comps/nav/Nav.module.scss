@@ -1,0 +1,47 @@
+@import "styles/mixins";
+
+.navbar {
+  display:flex;
+  padding:1em 0em;
+  align-items: center;
+
+  ul {
+    list-style-type: none;
+    margin:0 0 0 auto;
+  }
+  
+  a { 
+    text-decoration: none;
+    color:var(--clr-neutral-100);
+    text-transform: capitalize;
+  }
+}
+
+.secondaryMenu {
+  display:flex;
+  gap:1em;
+  align-items: center;
+}
+
+.avatar {
+  border-radius:100px;
+  width:32px;
+}
+
+
+.searchButton {
+  display:block;
+  width:25px;
+  height:25px;
+  color:white;
+  &:hover {
+    color:var(--gradient-primary);
+    cursor:pointer;
+  }
+}
+
+.userButton, .loginButton {
+  @include tablet(){
+    display:none;
+  }
+}
