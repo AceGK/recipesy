@@ -1,6 +1,6 @@
 @import "styles/mixins";
 
-.primaryMenu {
+.primaryMenu, .userMenu {
   flex: 1;
   display:flex;
   gap:1em;
@@ -10,6 +10,10 @@
     align-items: flex-start;
     padding-left: 0;
   }
+}
+
+.userMenu {
+  justify-content: flex-end;
 }
 
 .gradientLink {
@@ -33,5 +37,25 @@ li:hover .gradientLink {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+
+
+
+.avatar {
+  border-radius:100px;
+  width:32px;
+}
+
+
+.searchButton {
+  display:block;
+  width:25px;
+  height:25px;
+  color:white;
+  &:hover {
+    color:var(--gradient-primary);
+    cursor:pointer;
   }
 }

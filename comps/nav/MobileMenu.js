@@ -5,10 +5,11 @@ import useMediaQuery from '../../hooks/useMediaQuery'
 import styles from './MobileMenu.module.scss'
 import Hamburger from '../../public/icons/hamburger.svg'
 import Xmark from '../../public/icons/xmark.svg'
+import LogoutButton from '../user/LogoutButton'
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false)
-  const isBreakpoint = useMediaQuery(850);
+  const isBreakpoint = useMediaQuery(768);
 
   return (
     <>
@@ -25,7 +26,10 @@ export default function MobileMenu() {
         </div>
       }
 
-      {open && <div className={styles.backdrop} />}
+      {open
+        && isBreakpoint
+        && <div className={styles.backdrop} onClick={() => setOpen(!open)}/>
+      }
     </>
   )
 }

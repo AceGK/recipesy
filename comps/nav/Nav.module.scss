@@ -17,31 +17,9 @@
   }
 }
 
-.secondaryMenu {
+.rightAlign {
+  margin-left:auto;
   display:flex;
-  gap:1em;
   align-items: center;
-}
-
-.avatar {
-  border-radius:100px;
-  width:32px;
-}
-
-
-.searchButton {
-  display:block;
-  width:25px;
-  height:25px;
-  color:white;
-  &:hover {
-    color:var(--gradient-primary);
-    cursor:pointer;
-  }
-}
-
-.userButton, .loginButton {
-  @include tablet(){
-    display:none;
-  }
+  gap:1em;
 }

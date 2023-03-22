@@ -13,7 +13,8 @@
       var(--clr-tertiary-500) 100%
     );
 
-  --gradient-secondary: linear-gradient(to bottom right,#191c23,#232832);
+  --gradient-secondary: linear-gradient(to bottom right, #232832, #0d0c13);
+  --gradient-secondary-reverse: linear-gradient(to bottom right,#191c23,#232832);
 
 
   --clr-danger: hsl(0, 56%, 56%);
