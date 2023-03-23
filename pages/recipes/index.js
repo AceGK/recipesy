@@ -9,7 +9,7 @@ export default function Categories({ recipes }) {
 
   return (
     <div className="container">
-      <Header /> 
+      <Header category='all' /> 
       <CategoryList />
     
       <div className={styles.recipes}>
@@ -20,15 +20,6 @@ export default function Categories({ recipes }) {
     </div>
   );
 }
-
-
-// export async function getStaticPaths() {
-//   const { paths } = getCategories();
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
 
 export async function getServerSideProps(context) {
   let recipes = [];
@@ -47,5 +38,12 @@ export async function getServerSideProps(context) {
       recipes: JSON.parse(JSON.stringify(recipes)),
     },
   };
-
 }
+
+// export async function getStaticPaths() {
+//   const { paths } = getCategories();
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }

@@ -1,12 +1,17 @@
 import '../styles/globals.scss'
 import Nav from '../comps/nav/Nav'
-import { Inter } from '@next/font/google'
+import { Poppins } from '@next/font/google'
 
 import { UserContext } from '../lib/context';
 import { useUserData } from '../hooks/useUserData';
 import { useRouter } from "next/router";
 
-const customFont = Inter({display: "swap"});
+const customFont = Poppins({
+  display: "swap",
+  weight:['400','500','600','700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+});
 
 export default function MyApp({ Component, pageProps }) {
 

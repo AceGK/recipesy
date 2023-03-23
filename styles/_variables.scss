@@ -16,6 +16,18 @@
   --gradient-secondary: linear-gradient(to bottom right, #232832, #0d0c13);
   --gradient-secondary-reverse: linear-gradient(to bottom right,#191c23,#232832);
 
+  // --clr-3: #276174;
+  // --clr-4: #33c58e;
+  // --clr-5: #63FD88;
+
+  --clr-3: rgb(0, 220, 130);
+  --clr-4: rgb(54, 228, 218);
+  --clr-5: rgb(22, 167, 158);
+
+  --clr-3:hsl(17, 71%, 55%);
+  --clr-4:hsl(343, 74%, 57%);
+  --clr-5:hsl(252, 74%, 53%);
+
 
   --clr-danger: hsl(0, 56%, 56%);
   --clr-warning: hsl(33, 88%, 65%);

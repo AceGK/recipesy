@@ -14,7 +14,7 @@ export default function PrimaryMenu() {
       <Navitem href="/recipes" underline>
         recipes
       </Navitem>
-      <Navitem href="/categories" underline>
+      <Navitem href="/recipes/categories" underline>
         categories
       </Navitem>
       <Navitem href="/guides" underline>
@@ -22,6 +22,14 @@ export default function PrimaryMenu() {
       </Navitem>
 
       <div className={styles.userMenu}>
+        
+        {/* Post Recipe */}
+        {username
+          && <Navitem href="/dashboard" className="btn">
+            Post Recipe
+          </Navitem>
+        }
+
         {/* user icon/dashboard link */}
         {username &&
           <Navitem href='/dashboard' className={styles.userButton}>
@@ -40,8 +48,9 @@ export default function PrimaryMenu() {
 
         {/* login button */}
         {!username &&
-          <Navitem href="/login" className={styles.loginButton}>
-            <button>Login</button>
+          <Navitem href="/login" className="btn">
+            {/* can't wrap button w <a></a> */}
+            Login
           </Navitem>
         }
       </div>
@@ -55,7 +64,7 @@ function Navitem({ href, className, underline, children }) {
     <li>
       <Link href={href} className={className}>
         {children}
-        {underline && <div className={styles.gradientLink} />}
+        {underline && <div className="gradient-link" />}
       </Link>
     </li>
   )

@@ -1,0 +1,73 @@
+// .card {
+//   background-color: rgba(255, 255, 255, 0.05);
+//   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px, rgba(255, 255, 255, 0.03) 0px 0px 0px 2px inset;
+//   backdrop-filter: blur(30px);
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   cursor: pointer;
+//   border-radius: 0.5rem;
+//   padding: 2rem;
+//   gap: 1rem;
+// }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  background: #13131B;
+  border: 1px solid rgb(65, 64, 64);
+  padding: 2em;
+  border-radius:var(--br-md);
+  animation: gradient 10s ease infinite;
+  position:relative;
+  &:hover {
+    background:var(--gradient-primary);
+    border: 1px solid transparent;
+    background-size: 400% 400%;
+  }
+  // &:after {
+  //   content:'';
+  //   position:absolute;
+  //   top:0;
+  //   left:0;
+  //   width:100%;
+  //   height:100%;
+  //   animation: gradient 10s ease infinite;
+  //   background:var(--gradient-primary);
+  //   background-size: 400% 400%;
+  //   border-radius:var(--br-md);
+  //   z-index: -1;
+  //   filter:blur(10px)
+  // }
+}
+
+.icon {
+  svg{
+  width:35px;
+  height:35px;
+  }
+  // background-color: rgba(255, 255, 255,0.1);
+  // width:fit-content;
+  // padding:5px;
+}
+
+.title {
+  text-transform: capitalize;
+  font-weight: 700;
+}
+.description {
+  font-size:0.875rem;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

@@ -1,7 +1,7 @@
 import { getCategories } from '../../lib/categories';
+import { useRouter } from "next/router";
 import Link from 'next/link'
 import styles from './CategoryList.module.scss'
-import { useRouter } from "next/router";
 import ChevronRight from '../../public/icons/chevron-right.svg'
 
 export default function CategoryList() {
@@ -20,8 +20,12 @@ export default function CategoryList() {
 
       <ul className={styles.categoryList}>
         {categories.map((category) => (
+          <>
+          {/* don't display 'all recipes' button on /recipes */}
+          {router.asPath === '/recipes' && category.title === 'all' ? null : 
           <li
             key={category.title}
+            // hide currently active category
             style={router.asPath.includes(category.title) ? { display: 'none' } : { display: 'block' }}
           >
             <Link className='btn-dark' href={`/recipes/categories/${category.title}`}>
@@ -29,6 +33,8 @@ export default function CategoryList() {
               {category.title}
             </Link>
           </li>
+          }
+          </>
         ))}
       </ul>
 
