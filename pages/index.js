@@ -10,9 +10,9 @@ export default function Home() {
    <div>
     {/* <h1>Homepage</h1> */}
     {/* <Loader show /> */}
-
+{/* 
     <div className="card2"></div>
-    <div className="card"></div>
+    <div className="card"></div> */}
    </div>
   )
 }

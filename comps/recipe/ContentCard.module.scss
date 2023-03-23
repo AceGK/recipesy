@@ -1,0 +1,16 @@
+.container {
+  background:rgba(255, 255, 255, 0.01);
+}
+
+.title {
+  text-transform: capitalize;
+  background: rgba(255, 255, 255, 0.1);
+  padding:1rem;
+}
+
+.body {
+  padding:1rem;
+  ul {
+    margin:0;
+  }
+}

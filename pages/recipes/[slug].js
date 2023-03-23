@@ -2,34 +2,40 @@
 import { firestore } from '../../lib/firebase';
 import { collection, collectionGroup, getDocs, query, where } from 'firebase/firestore';
 import Link from 'next/link';
+import Header from '../../comps/recipe/Header'
+import ContentCard from '../../comps/recipe/ContentCard';
 
-export default function Recipe({recipe}) {
+export default function Recipe({ recipe }) {
 
-  return ( 
-    <>
-      <p>title: {recipe.title}</p>
+  return (
+    <div className="container">
 
-      <Link href={`/user/${recipe.author}`}>
-        <p>author: {recipe.author}</p>
-      </Link>
+      <Header recipe={recipe} />
 
-      <p>description: {recipe.description}</p>
+      <div className="grid">
+        <ContentCard title="Description">
+          <p>{recipe.description}</p>
+        </ContentCard>
 
-      <p>Ingredients:</p>
-        <ul>
-          {recipe.ingredients.map((i) => (
+        <ContentCard title="Ingredients">
+          <ul>
+            {recipe.ingredients.map((i) => (
               <li key={i}>{i}</li>
             ))}
-        </ul>
+          </ul>
+        </ContentCard>
 
-      <p>Instructions:</p>
-        <ul>
-          {recipe.instructions.map((i) => (
+        <ContentCard title="Instructions">
+          <ul>
+            {recipe.instructions.map((i) => (
               <li key={i}>{i}</li>
             ))}
-        </ul>
-    </>
-   );
+          </ul>
+        </ContentCard>
+
+      </div>
+    </div>
+  );
 }
 
 export async function getStaticPaths() {

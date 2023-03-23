@@ -11,13 +11,13 @@ export default function PrimaryMenu() {
 
   return (
     <ul className={styles.primaryMenu}>
-      <Navitem href="/recipes" underline>
+      <Navitem href="/recipes" className={styles.link}>
         recipes
       </Navitem>
-      <Navitem href="/recipes/categories" underline>
+      <Navitem href="/recipes/categories" className={styles.link}>
         categories
       </Navitem>
-      <Navitem href="/guides" underline>
+      <Navitem href="/guides" className={styles.link}>
         tips & guides
       </Navitem>
 
@@ -64,7 +64,7 @@ function Navitem({ href, className, underline, children }) {
     <li>
       <Link href={href} className={className}>
         {children}
-        {underline && <div className="gradient-link" />}
+        {/* {underline && <div className="gradient-link" />} */}
       </Link>
     </li>
   )

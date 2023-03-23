@@ -1,4 +1,3 @@
-import styles from '../../styles/Categories.module.scss'
 import { firestore } from '../../lib/firebase';
 import { collection, collectionGroup, getDocs, orderBy, query, where } from 'firebase/firestore';
 import RecipeCard from '../../comps/recipe/Card';
@@ -12,7 +11,7 @@ export default function Categories({ recipes }) {
       <Header category='all' /> 
       <CategoryList />
     
-      <div className={styles.recipes}>
+      <div className="grid">
         {recipes.map((recipe) => (
           <RecipeCard recipe={recipe} key={recipe.id} />
         ))}
