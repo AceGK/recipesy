@@ -33,5 +33,5 @@ export default function AccountPage() {
 
 function LogoutButton() {
   const { logoutUser } = useLogout();
-  return <button onClick={logoutUser}>Logout</button>
+  return <button className="btn" onClick={logoutUser}>Logout</button>
 }

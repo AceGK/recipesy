@@ -4,6 +4,7 @@ import { UserContext } from '../../lib/context';
 import { useContext } from 'react';
 import LogoutButton from '../user/LogoutButton';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import ThemeToggle from '../themeToggle';
 
 export default function PrimaryMenu() {
   const { user, username } = useContext(UserContext)
@@ -41,10 +42,10 @@ export default function PrimaryMenu() {
         }
 
         {/* logout button */}
-        {username
+        {/* {username
           && isBreakpoint
           && <li><LogoutButton /></li>
-        }
+        } */}
 
         {/* login button */}
         {!username &&
@@ -54,6 +55,8 @@ export default function PrimaryMenu() {
           </Navitem>
         }
       </div>
+              {/* theme toggle */}
+              <ThemeToggle />
     </ul>
 
   )

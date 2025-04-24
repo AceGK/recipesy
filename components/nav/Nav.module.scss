@@ -1,4 +1,4 @@
-@import "styles/mixins";
+@use "styles/mixins" as *;
 
 .navbar {
   display:flex;
@@ -12,7 +12,7 @@
   
   a { 
     text-decoration: none;
-    color:var(--clr-neutral-100);
+    // color:var(--clr-text-100);
     text-transform: capitalize;
   }
 }

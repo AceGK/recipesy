@@ -1,0 +1,20 @@
+.container {
+  background:rgba(255, 255, 255, 0.01);
+  border-radius:var(--br-md);
+  border:1px solid var(--clr-2);
+}
+
+.title {
+  text-transform: capitalize;
+  border-radius:var(--br-md) var(--br-md) 0 0;
+  background: var(--clr-2);
+  padding:1rem;
+}
+
+.body {
+  padding:1rem;
+  ul, ol {
+    margin:0;
+    padding-inline-start: 1rem;
+  }
+}

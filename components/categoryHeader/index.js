@@ -12,6 +12,7 @@ export default function Header(props) {
             <div key={category.title} className={styles.header}>
               <i>{category.icon}</i>
               <h1> {category.title === 'all' ? 'All Recipes' : category.title}</h1>
+              <p>{category.description}</p>
             </div>
           )
         }

@@ -19,23 +19,26 @@ export default function CategoryList() {
       </div>
 
       <ul className={styles.categoryList}>
-        {categories.map((category) => (
-          <>
-          {/* don't display 'all recipes' button on /recipes */}
-          {router.asPath === '/recipes' && category.title === 'all' ? null : 
-          <li
-            key={category.title}
-            // hide currently active category
-            style={router.asPath.includes(category.title) ? { display: 'none' } : { display: 'block' }}
-          >
-            <Link className='btn-dark' href={`/recipes/categories/${category.title}`}>
-              {category.icon}
-              {category.title}
-            </Link>
-          </li>
-          }
-          </>
-        ))}
+        {categories.map((category) => {
+          // skip "all" on /recipes
+          if (router.asPath === '/recipes' && category.title === 'all') return null;
+
+          return (
+            <li
+              key={category.title}
+              style={
+                router.asPath.includes(category.title)
+                  ? { display: 'none' }
+                  : { display: 'block' }
+              }
+            >
+              <Link className="btn-dark" href={`/recipes/categories/${category.title}`}>
+                {category.icon}
+                {category.title}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
 
     </div>

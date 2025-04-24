@@ -1,8 +1,8 @@
 import { firestore } from '../../lib/firebase';
 import { collection, collectionGroup, getDocs, orderBy, query, where } from 'firebase/firestore';
-import RecipeCard from '../../comps/recipe/Card';
-import CategoryList from '../../comps/categoryList'
-import Header from '../../comps/categoryHeader';
+import RecipeCard from '../../components/recipe/Card';
+import CategoryList from '../../components/categoryList'
+import Header from '../../components/categoryHeader';
 
 export default function Categories({ recipes }) {
 

@@ -1,5 +1,5 @@
-import RecipeCard from '../../comps/recipe/Card';
-import UserProfile from '../../comps/user/Profile';
+import RecipeCard from '../../components/recipe/Card';
+import UserProfile from '../../components/user/Profile';
 import { getUserWithUsername, postToJSON } from '../../lib/firebase';
 import { firestore } from '../../lib/firebase';
 import { collection, getDocs, orderBy, where } from 'firebase/firestore';
@@ -37,9 +37,10 @@ export async function getServerSideProps({ query }) {
 
 export default function UserProfilePage({ user, recipes }) {
   return (
-    <main>
+    <main className="container">  
       {/* <Metatags title={user.username} description={`${user.username}'s public profile`} /> */}
       <UserProfile user={user} />
+      <h2>Recipes</h2>
       {recipes.map((recipe) => (
           <RecipeCard id={recipe} recipe={recipe} />
         ))}

@@ -1,10 +1,10 @@
-@import "styles/mixins";
+@use "styles/mixins" as *;
 
 .hamburger {
   display: none;
   width: 25px;
   height: 25px;
-  color: var(--clr-neutral-100);
+  color: var(--clr-text-100);
   &:hover {
     // color:var(--gradient-primary);
     cursor: pointer;

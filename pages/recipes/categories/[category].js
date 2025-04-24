@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
-import styles from '../../../styles/Categories.module.scss'
+// import styles from '../../../styles/Categories.module.scss'
 import { getCategories } from '../../../lib/categories';
 
 import { firestore } from '../../../lib/firebase';
 import { collection, collectionGroup, getDocs, orderBy, query, where } from 'firebase/firestore';
-import RecipeCard from '../../../comps/recipe/Card';
-import CategoryList from '../../../comps/categoryList';
-import Header from '../../../comps/categoryHeader';
+import RecipeCard from '../../../components/recipe/Card';
+import CategoryList from '../../../components/categoryList';
+import Header from '../../../components/categoryHeader';
 
 export default function CategoryPages({ recipes }) {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function CategoryPages({ recipes }) {
     <div className="container">
       <Header category={category} />
       <CategoryList />
-      <div className={styles.recipes}>
+      <div className="grid">
         {recipes.map((recipe) => (
           <RecipeCard key={recipe.id} recipe={recipe}/>
         ))}

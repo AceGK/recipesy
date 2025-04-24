@@ -1,8 +1,7 @@
 
 import { getCategories } from '../../../lib/categories';
-import Link from 'next/link'
-import CategoryCard from '../../../comps/categoryCard';
-import Header from '../../../comps/categoryHeader';
+import CategoryCard from '../../../components/categoryCard';
+import Header from '../../../components/categoryHeader';
 
 export default function CategoriesPage() {
   const { categories } = getCategories();
@@ -10,7 +9,6 @@ export default function CategoriesPage() {
   return (
     <div className='container'>
       <Header title="Recipe Categories" />
-
       <div className="grid">
         {categories.map((category) => (
           <CategoryCard category={category} />

@@ -1,10 +1,11 @@
 import '../styles/globals.scss'
-import Nav from '../comps/nav/Nav'
-import { Poppins } from '@next/font/google'
+import Nav from '../components/nav/Nav'
+import { Poppins } from 'next/font/google'
 
 import { UserContext } from '../lib/context';
 import { useUserData } from '../hooks/useUserData';
 import { useRouter } from "next/router";
+import { ThemeProvider } from 'next-themes';
 
 const customFont = Poppins({
   display: "swap",
@@ -23,10 +24,12 @@ export default function MyApp({ Component, pageProps }) {
   
   return (
     <UserContext.Provider value={userData}>
+      <ThemeProvider>
       <main className={customFont.className}>
         {showHeader && <Nav />}
         <Component {...pageProps} />
       </main>
+      </ThemeProvider>
     </UserContext.Provider>
   );
 }

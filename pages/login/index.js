@@ -2,7 +2,7 @@ import { useEffect, useContext, useState, useCallback } from 'react';
 import { useRouter } from "next/router";
 import { UserContext } from '../../lib/context';
 import styles from './login.module.scss'
-import Logo from '../../comps/logo/Logo';
+import Logo from '../../components/logo/Logo';
 import Link from 'next/link';
 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -80,7 +80,7 @@ function LoginOptions({ setSignUp, setResetPassword }) {
     <>
       <h1>Login</h1>
       <div>
-        <button className={styles.googleButton} onClick={googleLogin}>
+        <button className={`${styles.googleButton} btn`} onClick={googleLogin}>
           <img src={'/icons/google.svg'} width="20px" /> Login with Google
         </button>
       </div>
@@ -114,7 +114,7 @@ function LoginOptions({ setSignUp, setResetPassword }) {
           </span>
         }
         <a className={styles.resetPassword} onClick={() => setResetPassword(true)}>Forgot password?</a>
-        <button type='submit'>Login</button>
+        <button className="btn" type='submit'>Login</button>
       </form>
       <a onClick={() => setSignUp(true)}>No account? <span>SIGN UP</span></a>
     </>
@@ -149,7 +149,7 @@ function ResetPasswordForm({ setResetPassword }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button type="submit">Reset Password</button>
+            <button className="btn" type="submit">Reset Password</button>
           </form>
           <a onClick={() => setResetPassword(false)}>Already have an account? <span>LOGIN</span></a>
         </>
@@ -195,7 +195,7 @@ function SignupForm({ setSignUp }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type='submit'>Signup</button>
+        <button className="btn" type='submit'>Signup</button>
         <a onClick={() => setSignUp(false)}>Already have an account? <span>LOGIN</span></a>
       </form>
     </>

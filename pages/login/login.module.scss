@@ -15,7 +15,7 @@
     right: 0px;
     bottom: 0px;
     left: 0px;
-    opacity: 0.02;
+    opacity: 0.03;
     filter:invert(1);
   }
 }
@@ -51,7 +51,7 @@
   }
   a {
     font-size:0.8rem;
-    color:var(--clr-neutral-400);
+    color:var(--clr-text-300);
     &:hover{
       color:var(--clr-primary-500);
       text-decoration:underline;

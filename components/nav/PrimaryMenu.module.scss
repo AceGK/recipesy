@@ -1,4 +1,4 @@
-@import "styles/mixins";
+@use "styles/mixins" as *;
 
 .primaryMenu, .userMenu {
   flex: 1;
@@ -22,7 +22,7 @@
     justify-content: center;
     gap: 10px;
     padding: 8px 16px;
-    color: var(--clr-neutral-200);
+    color: var(--clr-text-100);
     font-weight: 500;
     border: 1px solid transparent;
     border-radius: var(--br-md);

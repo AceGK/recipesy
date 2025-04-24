@@ -2,8 +2,8 @@
 import { firestore } from '../../lib/firebase';
 import { collection, collectionGroup, getDocs, query, where } from 'firebase/firestore';
 import Link from 'next/link';
-import Header from '../../comps/recipe/Header'
-import ContentCard from '../../comps/recipe/ContentCard';
+import Header from '../../components/recipe/Header'
+import ContentCard from '../../components/recipe/ContentCard';
 
 export default function Recipe({ recipe }) {
 
@@ -26,11 +26,11 @@ export default function Recipe({ recipe }) {
         </ContentCard>
 
         <ContentCard title="Instructions">
-          <ul>
+          <ol>
             {recipe.instructions.map((i) => (
               <li key={i}>{i}</li>
             ))}
-          </ul>
+          </ol>
         </ContentCard>
 
       </div>
