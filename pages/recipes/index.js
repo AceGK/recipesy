@@ -3,11 +3,13 @@ import { collection, collectionGroup, getDocs, orderBy, query, where } from 'fir
 import RecipeCard from '../../components/recipe/Card';
 import CategoryList from '../../components/categoryList'
 import Header from '../../components/categoryHeader';
+import Breadcrumbs from '../../components/breadcrumbs';
 
 export default function Categories({ recipes }) {
 
   return (
     <div className="container">
+      <Breadcrumbs />
       <Header category='all' /> 
       <CategoryList />
       

@@ -17,6 +17,7 @@ import Icon from '../icon';
 
 export default function CategorySwiper({ category }) {
   const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { categories } = getCategories();
 
   const selectedCategory = categories.find(cat => cat.title === category);
@@ -24,10 +25,11 @@ export default function CategorySwiper({ category }) {
   useEffect(() => {
     const fetchRecipes = async () => {
       if (!category) return;
-  
+
+      setLoading(true);
       try {
         let q;
-  
+
         if (category === 'all') {
           q = query(collectionGroup(firestore, 'recipes'));
         } else {
@@ -36,7 +38,7 @@ export default function CategorySwiper({ category }) {
             where('categories', 'array-contains', category)
           );
         }
-  
+
         const querySnapshot = await getDocs(q);
         const recipeList = querySnapshot.docs.map(doc => ({
           id: doc.id,
@@ -45,19 +47,26 @@ export default function CategorySwiper({ category }) {
         setRecipes(recipeList);
       } catch (error) {
         console.error(`Error fetching recipes for ${category}:`, error);
+      } finally {
+        setLoading(false);
       }
     };
-  
+
     fetchRecipes();
   }, [category]);
 
-  if (!selectedCategory || !recipes.length) return null;
+  if (!selectedCategory) return null;
+
+  const skeletonSlides = Array.from({ length: 4 }).map((_, i) => (
+    <SwiperSlide key={`skeleton-${i}`}>
+      <div className={styles.skeletonCard} />
+    </SwiperSlide>
+  ));
 
   return (
     <section className={styles.categorySection}>
       <div className="title">
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          {/* {selectedCategory.icon} */}
           <Icon icon={selectedCategory.icon} src={selectedCategory.src} width="35px" height="35px" />
           <h2>{selectedCategory.title.charAt(0).toUpperCase() + selectedCategory.title.slice(1)}</h2>
         </div>
@@ -72,11 +81,13 @@ export default function CategorySwiper({ category }) {
         slidesPerView={4}
         spaceBetween={20}
       >
-        {recipes.map(recipe => (
-          <SwiperSlide key={recipe.id}>
-            <RecipeCard recipe={recipe} />
-          </SwiperSlide>
-        ))}
+        {loading
+          ? skeletonSlides
+          : recipes.map(recipe => (
+              <SwiperSlide key={recipe.id}>
+                <RecipeCard recipe={recipe} />
+              </SwiperSlide>
+            ))}
       </Swiper>
     </section>
   );

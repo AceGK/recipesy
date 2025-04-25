@@ -7,6 +7,8 @@ import { collection, collectionGroup, getDocs, orderBy, query, where } from 'fir
 import RecipeCard from '../../../components/recipe/Card';
 import CategoryList from '../../../components/categoryList';
 import Header from '../../../components/categoryHeader';
+import Breadcrumbs from '../../../components/breadcrumbs';
+
 
 export default function CategoryPages({ recipes }) {
   const router = useRouter();
@@ -14,12 +16,13 @@ export default function CategoryPages({ recipes }) {
 
   return (
     <div className="container">
+      <Breadcrumbs />
       <Header category={category} />
-      <CategoryList />
+      {/* <CategoryList /> */}
       <section>
-        <div className="title">
+        {/* <div className="title">
           <h2>Recipes</h2>
-        </div>
+        </div> */}
         <div className="grid">
           {recipes.map((recipe) => (
             <RecipeCard recipe={recipe} key={recipe.id} />

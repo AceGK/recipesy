@@ -3,8 +3,7 @@
   flex-direction: column;
   overflow: hidden;
   background: var(--clr-2);
-  // border: 1px solid rgba(255, 255, 255, 0.1);
-  border: 1px solid var(--clr-4);
+  border: 1px solid var(--clr-border-100);
   border-radius: var(--br-md);
   animation: gradient 10s ease infinite;
 

@@ -7,6 +7,7 @@ import CategoryList from '../components/categoryList'
 import RecipeSwiper from '../components/swiper/RecipeSwiper'
 import { getCategories } from '../lib/categories'
 import Hero from '../components/hero'
+import CategorySwiper from '../components/swiper/CategorySwiper'
 
 export default function Home() {
   const { categories } = getCategories();
@@ -26,7 +27,8 @@ export default function Home() {
         buttonLink="/recipes"
       />
 
-      <CategoryList cards />
+      {/* <CategoryList cards /> */}
+      <CategorySwiper categories={categories} />
       {categories
         .map(cat => (
           <RecipeSwiper key={cat.title} category={cat.title} />
