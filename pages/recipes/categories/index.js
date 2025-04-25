@@ -8,7 +8,7 @@ export default function CategoriesPage() {
 
   return (
     <div className='container'>
-      <Header title="Recipe Categories" />
+      <h1 style={{padding:'2rem 0rem'}}>All Categories</h1>
       <div className="grid">
         {categories.map((category) => (
           <CategoryCard category={category} />

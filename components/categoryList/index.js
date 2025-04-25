@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 import Link from 'next/link'
 import styles from './CategoryList.module.scss'
 import ChevronRight from '../../public/icons/chevron-right.svg'
+import Icon from '../icon';
 
-export default function CategoryList() {
+export default function CategoryList({cards}) {
   const { categories } = getCategories();
   const router = useRouter()
 
@@ -14,7 +15,7 @@ export default function CategoryList() {
       <div className={styles.title}>
         <h2>categories</h2>
         <Link href="/recipes/categories">
-          See All <ChevronRight />
+          view all <ChevronRight />
         </Link>
       </div>
 
@@ -33,7 +34,8 @@ export default function CategoryList() {
               }
             >
               <Link className="btn-dark" href={`/recipes/categories/${category.title}`}>
-                {category.icon}
+                {/* {category.icon} */}
+                <Icon icon={category.icon} src={category.src} width="25px" height="25px" />
                 {category.title}
               </Link>
             </li>

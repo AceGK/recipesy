@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import PrimaryMenu from './PrimaryMenu'
 import useMediaQuery from '../../hooks/useMediaQuery'
 
@@ -11,13 +11,27 @@ export default function MobileMenu() {
   const [open, setOpen] = useState(false)
   const isBreakpoint = useMediaQuery(768);
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    // Clean up on unmount
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
+
   return (
     <>
       <div
         className={styles.hamburger}
         onClick={() => setOpen(!open)}
       >
-        {!open ? <Hamburger /> : <Xmark />}
+        {/* {!open ? <Hamburger /> : <Xmark />} */}
+        <Hamburger />
       </div>
 
       {isBreakpoint &&
@@ -26,10 +40,10 @@ export default function MobileMenu() {
         </div>
       }
 
-      {open
-        && isBreakpoint
-        && <div className={styles.backdrop} onClick={() => setOpen(!open)}/>
-      }
+      <div
+        className={`${styles.backdrop} ${open && isBreakpoint ? styles.backdrop__active : ''}`}
+        onClick={() => setOpen(false)}
+      />
     </>
   )
 }

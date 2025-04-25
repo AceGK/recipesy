@@ -10,12 +10,17 @@ export default function Categories({ recipes }) {
     <div className="container">
       <Header category='all' /> 
       <CategoryList />
-    
-      <div className="grid">
-        {recipes.map((recipe) => (
-          <RecipeCard recipe={recipe} key={recipe.id} />
-        ))}
-      </div>
+      
+      <section>
+        <div className="title">
+          <h2>Recipes</h2>
+        </div>
+        <div className="grid">
+          {recipes.map((recipe) => (
+            <RecipeCard recipe={recipe} key={recipe.id} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

@@ -26,7 +26,7 @@ export default function PrimaryMenu() {
         
         {/* Post Recipe */}
         {username
-          && <Navitem href="/dashboard" className="btn">
+          && <Navitem href="/submit-recipe" className="btn">
             Post Recipe
           </Navitem>
         }

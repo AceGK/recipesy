@@ -16,11 +16,16 @@ export default function CategoryPages({ recipes }) {
     <div className="container">
       <Header category={category} />
       <CategoryList />
-      <div className="grid">
-        {recipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe}/>
-        ))}
-      </div>
+      <section>
+        <div className="title">
+          <h2>Recipes</h2>
+        </div>
+        <div className="grid">
+          {recipes.map((recipe) => (
+            <RecipeCard recipe={recipe} key={recipe.id} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
@@ -51,7 +56,7 @@ export async function getServerSideProps(context) {
   else {
     const q = query(
       collectionGroup(firestore, 'recipes'),
-      where('category', 'array-contains', categorySlug)
+      where('categories', 'array-contains', categorySlug)
     )
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {

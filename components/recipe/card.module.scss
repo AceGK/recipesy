@@ -1,22 +1,41 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  overflow: hidden;
   background: var(--clr-2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1em;
-  border-radius:var(--br-md);
+  // border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--clr-4);
+  border-radius: var(--br-md);
   animation: gradient 10s ease infinite;
+
   &:hover {
-    background: linear-gradient(var(--clr-4) 0 0) padding-box,
+    border:1px solid transparent;
+    background: linear-gradient(var(--clr-2) 0 0) padding-box,
       var(--gradient-primary) border-box;
     background-size: 400% 400%;
   }
 }
 
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/2;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.content {
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
 .title {
   text-transform: capitalize;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 .tags {
@@ -25,12 +44,11 @@
 
   span {
     text-transform: capitalize;
-    font-weight:bold;
+    font-weight: bold;
     color: var(--clr-primary-500);
     font-size: 0.75rem;
   }
 }
-
 @keyframes gradient {
   0% {
     background-position: 0% 50%;

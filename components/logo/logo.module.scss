@@ -4,7 +4,8 @@
 }
 
 .mask {
-  background: var(--clr-text-100) border-box;
+  // background: var(--clr-text-100) border-box;
+  background:var(--gradient-primary) border-box;
   background-size: 200% 200%;
   animation: gradient 10s ease infinite;
   display:block;
@@ -18,7 +19,7 @@
   mask-image: url('/recipeasy-logo.svg');
   mask-mode: alpha;
   &:hover {
-    background:var(--gradient-primary) border-box;
+    background:var(--clr-text-100) border-box;
     background-size: 200% 200%;
   }
 }

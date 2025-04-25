@@ -1,0 +1,54 @@
+.hero {
+  position: relative;
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  // text-align: center;
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  color: white;
+
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+    z-index: 1;
+    border-radius: inherit;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  text-wrap:balance;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color:#f0f0f0;
+
+    @media (min-width: 768px) {
+      font-size: 3rem;
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    // max-width: 600px;
+    margin-inline: auto;
+    color: #f0f0f0;
+  }
+}
+
+.button {
+  border-radius:50px;
+  width: fit-content;
+}

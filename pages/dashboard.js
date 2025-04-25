@@ -20,15 +20,18 @@ export default function AccountPage() {
   }, [])
 
 
-  return ( 
-    <>
+  return (
+    <main className="container">
       <h1>Dashboard</h1>
       <img src={user?.photoURL || '/icons/user-circle.svg'} referrerPolicy="no-referrer" />
       <p>Hello, {username}</p>
       <LogoutButton />
-    </>
-   );
-  }
+      <button href="/submit-recipe" className="btn">
+        Post Recipe
+      </button>
+    </main>
+  );
+}
 
 
 function LogoutButton() {

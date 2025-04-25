@@ -11,7 +11,7 @@ export default function RecipeHeader({ recipe }) {
         <h1>{recipe.title}</h1>
         <div className={styles.tags}>
           {categories.map((category) => {
-            return recipe.category.some(el => el === category.title)
+            return recipe.categories.some(el => el === category.title)
               &&
               <Link key={category.title} className={styles.tag} href={`/recipes/categories/${category.title}`}>
                 {category.icon}
