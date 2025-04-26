@@ -20,7 +20,7 @@ export default function Home() {
     <div className="card"></div> */}
 
       <Hero
-        backgroundImage="/hero.jpg"
+        backgroundImage="/hero-background.jpg"
         title="Recipes Made Easy"
         description="Straightforward recipes. No ads, no fluff, just food."
         buttonText="View All Recipes"

@@ -33,7 +33,13 @@ export default function SearchButton() {
   useEffect(() => {
     if (searchTerm.trim()) {
       const matches = recipes.filter((recipe) =>
-        [recipe.title, recipe.description, recipe.ingredients?.join(' '), recipe.instructions?.join(' ')]
+        [
+          recipe.title,
+          recipe.description,
+          recipe.ingredients?.join(' '),
+          recipe.instructions?.join(' '),
+          recipe.categories?.join(' '), // 👈 new line for categories
+        ]
           .filter(Boolean)
           .some(field => field.toLowerCase().includes(searchTerm.toLowerCase()))
       );

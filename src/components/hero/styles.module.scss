@@ -6,7 +6,7 @@
   // text-align: center;
   background-size: cover;
   background-position: center;
-  height: 400px;
+  height: 450px;
   padding: 2rem;
   border-radius: 1rem;
   margin-bottom: 2rem;
@@ -17,7 +17,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+    background: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
     z-index: 1;
     border-radius: inherit;
   }
