@@ -83,10 +83,16 @@ select {
 
 //#region Globals
 
-body {
-  background: var(clr-background-100);
+html {
+  // scrollbar-gutter:stable;
+  background: var(--background-gradient);
   background-image: var(--background-gradient);
 }
+
+// body {
+//   background: var(clr-background-100);
+//   background-image: var(--background-gradient);
+// }
 
 .container {
   width: calc(100% - 2.5rem);
@@ -94,11 +100,11 @@ body {
   margin: auto;
   // border:1px dotted red;
   @include tablet {
-    width: calc(100% - 1.5rem);
+    width: calc(100% - 2rem);
   }
-  @include mobile {
-    width: calc(100% - 1rem);
-  }
+  // @include mobile {
+  //   width: calc(100% - 1rem);
+  // }
 }
 
 h1,

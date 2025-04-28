@@ -1,26 +1,50 @@
 .container {
- border-radius: var(--br-lg);
- section {
-  background: rgba(255, 255, 255, 0.01);
-  text-align: center;
-  text-transform: capitalize;
+  position: relative;
+  overflow: hidden;
   border-radius: var(--br-lg);
-  padding:5em 0;
- }
+  margin-bottom:1rem;
 
- aside {
-  display:flex;
-  flex-wrap:wrap;
-  // background-color: blue;
-  gap:1em;
-  margin:1em 0em;
-  div {
-    white-space: nowrap;
-    flex:1 1 0;
-    padding:1em;
-    background:rgba(255, 255, 255, 0.01);
-   }
- }
+  .bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    height: 300px;
+  
+    .bgImage {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      filter: brightness(0.4);
+    }
+  }
+  
+
+  section {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    text-transform: capitalize;
+    border-radius: var(--br-lg);
+    padding: 5em 0;
+  }
+
+  aside {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin: 1em 0em;
+
+    div {
+      white-space: nowrap;
+      flex: 1 1 0;
+      padding: 1em;
+      background: var(--clr-2);
+      border: 1px solid var(--clr-border-100);
+      border-radius: var(--br-md);
+    }
+  }
 }
 
 .author {
@@ -28,27 +52,24 @@
 }
 
 .title {
-  
+  color:white;
 }
 
 .tags {
-  display:flex;
+  display: flex;
   justify-content: center;
-  gap:0.5em;
-  margin:1rem;
+  gap: 0.5em;
 
   .tag {
-    background-color: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(20px);
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--clr-text-100);
     font-size: 0.75rem;
     padding: 0.3rem 0.8rem;
     border-radius: 0.2rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    transition: all 0.1s ease 0s;
+
     svg {
       width: 15px;
       height: 15px;

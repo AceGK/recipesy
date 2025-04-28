@@ -1,0 +1,117 @@
+@use "styles/mixins" as *;
+
+.inputContainer {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+
+  label {
+    font-weight: 600;
+    color: var(--clr-text-100);
+  }
+
+  input,
+  select {
+    height: 3rem;
+    width: 100%;
+    border: 1px solid var(--clr-border-100);
+    border-radius: 10px;
+    background-color: var(--clr-1);
+  }
+  input:focus,
+  select:focus,
+  input[type="date"]:focus-within {
+    outline: none;
+    border-color: var(--clr-primary-300);
+  }
+  input:focus + .placeholderText .text,
+  select:focus + .placeholderText .text,
+  input[type="date"]:focus-within + .placeholderText .text,
+  :not(input[value=""]):not(input:placeholder-shown) + .placeholderText .text,
+  input[type="date"][value]:not([value=""]) + .placeholderText .text,
+  input:-webkit-autofill + .placeholderText .text,
+  input:-webkit-autofill:hover + .placeholderText .text,
+  input:-webkit-autofill:focus + .placeholderText .text, 
+  input.hasValue + .placeholderText .text {
+    border-radius:5px;
+    background-color: var(--clr-1);
+    font-size: 0.8125rem;
+    transform: translate(0, -1.70em);
+    opacity:1;
+  }
+  input:focus + .placeholderText .text,
+  select:focus + .placeholderText .text,
+  input[type="date"]:focus-within + .placeholderText .text {
+    border-color: var(--clr-primary-300);
+    color: var(--clr-primary-300);
+  }
+
+  .placeholderText {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+  }
+  .text {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+    background-color: transparent;
+    transform: translate(0);
+    color: var(--clr-text-100);
+    opacity: 0.9;
+    transition: transform 0.15s ease-out, font-size 0.15s ease-out,
+    background-color 0s, color 0s ease-out;
+    @include mobile() {
+      padding: 0 0.3125rem;
+    }
+  }
+  input,
+  select,
+  .placeholderText {
+    font-size: 1rem;
+    padding: 0 1rem;
+    @include mobile() {
+      padding: 0 0.875rem;
+    }
+  }
+ 
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px var(--clr-text-100) inset !important;
+  }
+
+  input[type="date"]::-webkit-datetime-edit {
+    opacity: 0;
+  }
+  input[type="date"]:focus::-webkit-datetime-edit,
+  input[type="date"]:focus-within::-webkit-datetime-edit,
+  input[type="date"][value]:not([value=""])::-webkit-datetime-edit {
+    opacity: 1;
+  }
+
+  .noTransition {
+    .text {
+      transition: none !important;
+    }
+  }
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.alignLeft {
+  text-align: left;
+}

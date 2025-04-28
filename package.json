@@ -22,7 +22,8 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",
-    "@types/node": "18.11.9",
-    "@types/react": "18.0.24"
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.24",
+    "typescript": "^5.8.3"
   }
 }

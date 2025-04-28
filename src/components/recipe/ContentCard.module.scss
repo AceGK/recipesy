@@ -1,7 +1,7 @@
 .container {
-  background:rgba(255, 255, 255, 0.01);
+  background:var(--clr-2);
   border-radius:var(--br-md);
-  border:1px solid var(--clr-2);
+  border:1px solid var(--clr-border-100);
 }
 
 .title {
